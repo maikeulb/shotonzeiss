@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch, Link, HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import Photos from './containers/Photos';
 import './App.css';
