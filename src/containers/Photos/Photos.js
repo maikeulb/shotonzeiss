@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import Masonry from 'react-masonry-component';
+import { connect } from 'react-redux';
 
-import PhotoDetail from '../photo_detail/photo_detail';
+import withErrorHandler from '../../hoc//withErrorHandler';
+
+import PhotoDetail from '../../components/PhotoDetail/PhotoDetail';
+
+import Masonry from 'react-masonry-component';
+import axios from '../../axios-orders';
+import { Spin } from 'antd';
+import * as actions from '../../store/actions/index';
 
 class Photos extends Component {
   state = {
@@ -10,11 +17,15 @@ class Photos extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchAllPhotos();
+    this.props.onFetchAllPhotos();
   }
 
   render() {
-    let images = this.props.images;
+    let photos = <Spin />;
+    if ( !this.props.loading ) {
+      photos = this.props.photos;
+    }
+
     let masonryOptions = {
       transitionDuration: 1,
       gutter: 0,
@@ -22,12 +33,7 @@ class Photos extends Component {
     };
 
     return (
-      <div className="photos-index-container">
-        <div className="sidenav">
-          <span className="quote">
-          <SessionFormContainer />
-        </div>
-
+      <div>
         <Masonry className={"photos-index"}
           elementType={'ul'}
           options={masonryOptions}
@@ -45,4 +51,22 @@ class Photos extends Component {
   }
 }
 
-export default withRouter(Photos);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.currentUser,
+    photos: state.photos.photos
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() ),
+    onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto(photoId) )
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PhotosIndex);
+export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( Orders, axios ) );
