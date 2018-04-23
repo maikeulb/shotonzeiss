@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch, Link, HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import Photos from './containers/Photos';
+import Layout from './hoc/Layout';
+import Photos from './containers/Photos/Photos';
 import './App.css';
 
 class App extends Component {
-  render() {
+  render () {
+    let routes = (
+        <Route path="/" exact component={Photos} />
+    );
     return (
       <div className="App">
-        <Switch>
-          <Route path="/" component={PhotosContainer} />
-       </Switch>
+        <Layout>
+          {routes}
+        </Layout>
       </div>
     );
   }
 }
+
 
 export default App;
