@@ -86,11 +86,10 @@ export const fetchPhotosFail = ( error ) => {
   };
 };
 
-export const fetchAllPhotos = (token) => {
+export const fetchAllPhotos = () => {
   return dispatch => {
     dispatch(fetchAllPhotosStart());
-    const queryParams = '?auth=' + token;
-    axios.get( '/photos.json' + queryParams )
+    axios.get( '/photos.json')
       .then( res => {
         const fetchedPhotos = [];
         for ( let key in res.data ) {
@@ -107,10 +106,10 @@ export const fetchAllPhotos = (token) => {
   };
 };
 
-export const fetchSinglePhoto = (photoId, token) => {
+export const fetchSinglePhoto = (photoId) => {
   return dispatch => {
     dispatch(fetchSinglePhotoStart());
-    const queryParams = '?auth=' + token + '&equalTo="' + photoId + '"';
+    const queryParams = '?&equalTo="' + photoId + '"';
     axios.get( '/photos.json' + queryParams )
       .then( res => {
         const fetchedPhoto = [];
@@ -128,10 +127,10 @@ export const fetchSinglePhoto = (photoId, token) => {
   };
 };
 
-export const fetchUserPhoto = (userId, token) => {
+export const fetchUserPhoto = (userId) => {
   return dispatch => {
     dispatch(fetchSinglePhotoStart());
-    const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+    const queryParams = '?&orderBy="userId"&equalTo="' + userId + '"';
     axios.get( '/photos.json' + queryParams )
       .then( res => {
         const fetchedPhoto = [];
