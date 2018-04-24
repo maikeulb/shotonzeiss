@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Aux from './Aux';
 import { Layout as AntLayout, Menu, Icon } from 'antd';
 import styled from 'styled-components';
+import logo from '../assets/logo.png';
 
 const { Header, Content, Footer, Sider } = AntLayout;
 
@@ -16,7 +17,7 @@ const Trigger = styled.div`
 `;
 
 const Logo = styled.div`
-  height: 32px;
+  height: 100px;
   background: rgba(255,255,255,.2);
   margin: 16px;
   padding: 0 10px;
@@ -47,10 +48,10 @@ class Layout extends Component {
             onCollapse={(collapsed, type) => { }}
             collapsed={this.state.collapsed}>
             <Logo>
-              Shot On Zeiss
+              <img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" />
             </Logo>
             <Menu theme="light" mode="inline" >
-              <Menu.Item key="1"><Link to='/photos'><span>Photos</span></Link></Menu.Item>
+              <Menu.Item key="1"><Link to='/'><span>Photos</span></Link></Menu.Item>
             </Menu>
           </Sider>
 
