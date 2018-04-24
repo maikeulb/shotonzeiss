@@ -5,19 +5,24 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import * as actions from './store/actions/index';
 import photosReducer from './store/reducers/photos';
+import authReducer from './store/reducers/auth';
 
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import App from './App';
 
 const rootReducer = combineReducers({
-    photos: photosReducer
+  photos: photosReducer,
+  auth: authReducer
 });
 
 const store = createStore(
   rootReducer, 
   compose(applyMiddleware(thunk))
 );
+
+store.dispatch(actions.verifyAuth());
 
 const app = (
   <Provider store={store}>
