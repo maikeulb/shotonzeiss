@@ -22,7 +22,9 @@ const ImgModal = styled.img `
   }
 `;
 
-
+const Li = styled.div `
+  list-style-type: none;
+`;
 
 class PhotoDetail extends Component {
   state = {
@@ -46,9 +48,9 @@ class PhotoDetail extends Component {
 
     return(
       <div>
-        <li>
+        <Li>
           <Img src={ photoUrl }  alt="img"  onClick={ this.showModal }></Img>
-        </li>
+        </Li>
           <Modal 
             visible={ this.state.visible }
             wrapClassName="vertical-center-modal"
