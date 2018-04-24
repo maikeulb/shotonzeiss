@@ -7,7 +7,7 @@ import withErrorHandler from '../../hoc//withErrorHandler';
 import PhotoDetail from '../../components/PhotoDetail/PhotoDetail';
 
 import Masonry from 'react-masonry-component';
-import axios from '../../axios-orders';
+import axios from '../../axios-photos';
 import { Spin } from 'antd';
 import * as actions from '../../store/actions/index';
 
@@ -69,4 +69,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PhotosIndex);
-export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( Orders, axios ) );
+export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( photos, axios ) );
