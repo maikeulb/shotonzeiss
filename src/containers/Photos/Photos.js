@@ -27,19 +27,9 @@ class Photos extends Component {
     // this.props.onFetchAllPhotos();
   }
 
-  // state = {
-  //   layoutReady: false
-  // }
-
   state = {
-    imagesLoaded: true
+    layoutReady: false
   }
-
-  handleImagesLoaded = () => {
-		if (!this.state.layoutReady) {
-			this.setState({ imagesLoaded: true });
-		}
-	}
 
   handleLayoutReady = () => {
 		if (!this.state.layoutReady) {
@@ -106,24 +96,16 @@ class Photos extends Component {
     }
 
     const masonryOptions = {
-      transitionDuration: 1,
+      transitionDuration: 0,
       fitWidth: false
     };
 
-    let style = { visibility: 'hidden' };
-
-    let loadingGif = <Spin />;
-
-      style = {
-		   	visibility: 'visible'
-      };
-      photoDetails = photos.map( photo =>
-        <PhotoDetail
-          key={ photo.id }
-          photo={ photo }
-        />
-      );
-    }
+    const photoDetails = photos.map( photo =>
+      <PhotoDetail
+        key={ photo.id }
+        photo={ photo }
+      />
+    );
 
     const masonry = (
       <Container>
@@ -132,14 +114,12 @@ class Photos extends Component {
           options={ masonryOptions }
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
-          onLayoutComplete={this.handleLayoutReady}
-          onImagesLoaded={this.handleImagesLoaded}
         	style={ style }
           >
-          { this.state.imagesLoaded ? photoDetails : loadingGif }
+          { photoDetails }
         </Masonry>
       </Container>
-    )
+    );
 
     return masonry;
   }
@@ -148,13 +128,16 @@ class Photos extends Component {
 const mapStateToProps = state => {
   return {
     photos: state.photos.photos
+    loading: state.order.loading,
+    user: state.auth.user,
+    userId: state.auth.user.uid
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() ),
-    onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto(photoId) )
+    onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() )
+    onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto() )
   };
 };
 
