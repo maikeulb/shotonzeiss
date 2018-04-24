@@ -14,3 +14,9 @@ export {
   fetchUserPhotoStart,
   fetchPhotosFail
 } from './photos';
+export {
+  startLogin,
+  startLogout,
+  setAuthRedirectPath,
+  verifyAuth,
+} from './auth';
