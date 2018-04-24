@@ -81,7 +81,7 @@ export const fetchUserPhotoSuccess = ( photos ) => {
 
 export const fetchPhotosFail = ( error ) => {
   return {
-    type: actionTypes.FETCH_PHOTOS_FAILED,
+    type: actionTypes.FETCH_PHOTOS_FAIL,
     error: error
   };
 };

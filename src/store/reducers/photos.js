@@ -1,58 +1,94 @@
 import * as actionTypes from '../actions/actionTypes'
 import {updateObject} from '../utility'
 
-const initialState = {}
-
-const addPhoto = (state, action) => {
-  const updatedPhoto = {[action.photoName]: state.photos[action.photoName] + 1}
-  const updatedPhotos = updateObject(state.photos, updatedPhoto);
-  const updatedState = {
-    photos: updatedPhotos,
-  }
-  return updateObject(state, updatedState); 
+const initialState = {
+  photos: [],
+  loading: false,
 };
 
-const removePhoto = (state, action) => {
-  const updatedPhos = {[action.photoName]: state.photos[action.photoName] - 1}
-  const updatedPho = updateObject(state.photos, updatedPhos);
-  const updatedSt = {
-    photos: updatedPho,
-  }
-  return updateObject(state, updatedSt); 
+
+const uploadInit = ( state, action ) => {
+  return updateObject( state );
+};
+
+const uploadPhotoStart = ( state, action ) => {
+  return updateObject( state, 
+    { loading: true } 
+  );
+};
+
+const uploadPhotoSuccess = ( state, action ) => {
+  const newPhoto = updateObject( action.photoData, { id: action.photoId } );
+  return updateObject( state, {
+    loading: false,
+    photos: state.photos.concat( newPhoto )
+  } );
+};
+
+const uploadPhotoFail = ( state, action ) => {
+  return updateObject( state, { 
+    loading: false 
+  } );
 };
 
 const fetchAllPhotosStart = ( state, action ) => {
-  return updateObject( state, {  } );
+  return updateObject( state, { 
+    loading: true 
+  } );
 };
 
 const fetchSinglePhotoStart = ( state, action ) => {
-  return updateObject( state, {  } );
+  return updateObject( state, { 
+    loading: true 
+  } );
+};
+
+const fetchUserPhotoStart = ( state, action ) => {
+  return updateObject( state, { 
+    loading: true 
+  } );
 };
 
 const fetchAllPhotosSuccess = ( state, action ) => {
   return updateObject( state, {
-    orders: action.photos,
+    photos: action.photos,
+    loading: false
   } );
 };
 
 const fetchSinglePhotoSuccess = ( state, action ) => {
   return updateObject( state, {
-    orders: action.photos,
+    photos: action.photos,
+    loading: false
   } );
 };
 
-const fetchPhotosFailed = (state, action) => {
-    return updateObject(state, {error: true}); };
+const fetchUserPhotoSuccess = ( state, action ) => {
+  return updateObject( state, {
+    photos: action.photos,
+    loading: false
+  } );
+};
+
+const fetchPhotosFail = ( state, action ) => {
+  return updateObject( state, { 
+    loading: false 
+  } );
+};
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
-        case actionTypes.ADD_PHOTO: return addPhoto(state, action);
-        case actionTypes.REMOVE_PHOTO: return removePhoto(state, action);
+        case actionTypes.UPLOAD_PHOTO_INIT: return uploadInit(state, action);
+        case actionTypes.UPLOAD_PHOTO_START: return uploadPhotoStart(state, action);
+        case actionTypes.UPLOAD_PHOTO_SUCCESS: return uploadPhotoSuccess(state, action);
+        case actionTypes.UPLOAD_PHOTO_FAIL: return uploadPhotoFail(state, action);
         case actionTypes.FETCH_ALL_PHOTOS_START: return fetchAllPhotosStart(state, action);
         case actionTypes.FETCH_ALL_PHOTOS_SUCCESS: return fetchAllPhotosSuccess(state, action);
         case actionTypes.FETCH_SINGLE_PHOTO_START: return fetchSinglePhotoStart(state, action);
         case actionTypes.FETCH_SINGLE_PHOTO_SUCCESS: return fetchSinglePhotoSuccess(state, action);
-        case actionTypes.FETCH_PHOTOS_FAILED: return fetchPhotosFailed(state, action);
+        case actionTypes.FETCH_USER_PHOTO_START: return fetchUserPhotoStart(state, action);
+        case actionTypes.FETCH_USER_PHOTO_SUCCESS: return fetchUserPhotoSuccess(state, action);
+        case actionTypes.FETCH_PHOTOS_FAIL: return fetchPhotosFail(state, action);
         default: return state; }
 };
 
