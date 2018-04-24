@@ -3,13 +3,13 @@ import axios from '../../axios-photos';
 
 export const fetchAllPhotosStart = () => {
   return {
-    type: actionTypes.FETCH_SINGLE_PHOTO_START
+    type: actionTypes.FETCH_ALL_PHOTOS_START
   };
 };
 
 export const fetchSinglePhotoStart = () => {
   return {
-    type: actionTypes.FETCH_ALL_PHOTOS_START
+    type: actionTypes.FETCH_SINGLE_PHOTO_START
   };
 };
 
@@ -41,7 +41,7 @@ export const removePhoto = ( name ) => {
   };
 };
 
-export const fetchPhotosFailed = () => {
+export const fetchPhotosFail = () => {
   return {
     type: actionTypes.FETCH_PHOTOS_FAILED
   };
@@ -60,7 +60,7 @@ export const fetchAllPhotos = (userId, token) => {
               id: key
           } );
         }
-        dispatch(fetchPhotosSuccess(fetchedPhotos));
+        dispatch(fetchAllPhotosSuccess(fetchedPhotos));
       } )
     .catch( err => {
       dispatch(fetchPhotosFail(err));
@@ -81,7 +81,7 @@ export const fetchSinglePhoto = (photoId, token) => {
               id: key
           } );
         }
-        dispatch(fetchSinglePhotoSuccess(fetchedSinglePhoto));
+        dispatch(fetchSinglePhotoSuccess(fetchSinglePhoto));
       } )
     .catch( err => {
       dispatch(fetchPhotosFail(err));

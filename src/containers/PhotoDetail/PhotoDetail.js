@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'antd';
+import Aux from '../../../hoc/Aux';
 
 class PhotoDetail extends Component {
   state = {
@@ -20,13 +21,14 @@ class PhotoDetail extends Component {
   }
 
   render() {
+    const { userId, photoUrl, user, userPhotoUrl } = this.props.photo;
     const photoButton =(
       <Button type="primary" onClick = {this.showModal}>
         <li>
-          <img src={ props.photoUrl } />
+          <img src={ photoUrl } />
           <div>
             <span>
-              { props.user }
+              { user }
             </span>
           </div>
         </li>
@@ -34,23 +36,22 @@ class PhotoDetail extends Component {
     );
 
     return(
-      <div>
+      <Aux>
         { photoButton }
           <Modal 
             visible={this.state.showModal}
             onCancel={this.handleCancel}
-            onCreate={this.handleCancel}
+            onCreate={this.handleCancel}>
             <div>
-              <img src={ props.photoUrl} />
+              <img src={ photoUrl} />
               <div>
-                <h3> "{ props.title }" </h3>
-              <Link to={`/user/${props.userId}`}>
-                <img src={ props.userPhotoUrl} />{ props.user }
+              <Link to={`/user/${userId}`}>
+                <img src={ userPhotoUrl} />{ user }
               </Link>
               </div>
             </div>
           </Modal>
-      </div>
+      </Aux>
     );
   }
 }

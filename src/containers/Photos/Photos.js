@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import withErrorHandler from '../../hoc//withErrorHandler';
 
-import PhotoDetail from '../../components/PhotoDetail/PhotoDetail';
+import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
 import Masonry from 'react-masonry-component';
 import axios from '../../axios-photos';
@@ -12,10 +12,6 @@ import { Spin } from 'antd';
 import * as actions from '../../store/actions/index';
 
 class Photos extends Component {
-  state = {
-    type: "feed"
-  };
-
   componentDidMount() {
     this.props.onFetchAllPhotos();
   }
@@ -26,7 +22,7 @@ class Photos extends Component {
       photos = this.props.photos;
     }
 
-    let masonryOptions = {
+    const masonryOptions = {
       transitionDuration: 1,
       gutter: 0,
       fitWidth: false
@@ -65,8 +61,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PhotosIndex);
-export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( photos, axios ) );
+export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( Photos, axios ) );
