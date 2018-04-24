@@ -34,7 +34,6 @@ class Photos extends Component {
   handleLayoutReady = () => {
 		if (!this.state.layoutReady) {
 			this.setState({ layoutReady: true });
-      console.log(this.state.layoutReady)
 		}
 	}
 
@@ -101,32 +100,38 @@ class Photos extends Component {
       fitWidth: false
     };
 
-    let masonry = <Spin />
-    masonry = 
+    let style = { visibility: 'hidden' };
+
+    let photoDetails = <Spin />;
+
+    if ( this.state.layoutReady ) {
+      style = {
+		   	visibility: 'visible'
+      };
+      photoDetails = photos.map( photo =>
+        <PhotoDetail
+          key={ photo.id }
+          photo={ photo }
+        />
+      );
+    }
+
+    const masonry = (
+      <Container>
         <Masonry
           elementType={'ul'}
           options={ masonryOptions }
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
           onLayoutComplete={this.handleLayoutReady}
-        	style={{ 
-				  	visibility: (this.state.layoutReady)
-				  		? 'visible'
-				  		: 'hidden', 
-				  }}
+        	style={ style }
           >
-          { photos.map( photo =>
-            <PhotoDetail
-              key={ photo.id }
-              photo={ photo }
-              />) }
+          { photoDetails }
         </Masonry>
-
-    return (
-      <Container>
-        { masonry }
       </Container>
-    );
+    )
+
+    return masonry;
   }
 }
 
