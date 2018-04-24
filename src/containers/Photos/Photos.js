@@ -27,9 +27,19 @@ class Photos extends Component {
     // this.props.onFetchAllPhotos();
   }
 
+  // state = {
+  //   layoutReady: false
+  // }
+
   state = {
-    layoutReady: false
+    imagesLoaded: true
   }
+
+  handleImagesLoaded = () => {
+		if (!this.state.layoutReady) {
+			this.setState({ imagesLoaded: true });
+		}
+	}
 
   handleLayoutReady = () => {
 		if (!this.state.layoutReady) {
@@ -102,9 +112,8 @@ class Photos extends Component {
 
     let style = { visibility: 'hidden' };
 
-    let photoDetails = <Spin />;
+    let loadingGif = <Spin />;
 
-    if ( this.state.layoutReady ) {
       style = {
 		   	visibility: 'visible'
       };
@@ -124,9 +133,10 @@ class Photos extends Component {
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
           onLayoutComplete={this.handleLayoutReady}
+          onImagesLoaded={this.handleImagesLoaded}
         	style={ style }
           >
-          { photoDetails }
+          { this.state.imagesLoaded ? photoDetails : loadingGif }
         </Masonry>
       </Container>
     )

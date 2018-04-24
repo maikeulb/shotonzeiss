@@ -13,12 +13,6 @@ export const uploadPhotoStart = () => {
   };
 };
 
-export const uploadPhotoSuccess = () => {
-  return {
-    type: actionTypes.UPLOAD_PHOTO_SUCCESS
-  };
-};
-
 export const uploadPhotoSuccess = ( id, photoData ) => {
   return {
     type: actionTypes.UPLOAD_PHOTO_SUCCESS,

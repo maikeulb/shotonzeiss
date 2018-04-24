@@ -51,7 +51,7 @@ class Layout extends Component {
               <img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" />
             </Logo>
             <Menu theme="light" mode="inline" >
-              <Menu.Item key="1"><Link to='/'><span>Photos</span></Link></Menu.Item>
+              <Menu.Item key="1"><Link to='/photos'><span>Photos</span></Link></Menu.Item>
             </Menu>
           </Sider>
 
