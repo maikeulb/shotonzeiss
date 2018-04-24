@@ -20,35 +20,15 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    const { userId, photoUrl, user, userPhotoUrl } = this.props.photo;
-    const photoButton =(
-      <Button type="primary" onClick = {this.showModal}>
-        <li>
-          <img src={ photoUrl } alt="img" />
-          <div>
-            <span>
-              { user }
-            </span>
-          </div>
-        </li>
-      </Button>
-    );
-
+    const { photoUrl } = this.props.photo;
     return(
       <div>
-        { photoButton }
+         <img src={ photoUrl } alt="img"  onClick= {this.showModal}/>
           <Modal 
-            visible={this.state.showModal}
+            visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCancel}>
-            <div>
-              <img src={ photoUrl } alt="img" />
-              <div>
-              <Link to={`/user/${userId}`}>
-                <img src={ userPhotoUrl} alt="img"/>{ user }
-              </Link>
-              </div>
-            </div>
+            <img src={ photoUrl } alt="img" />
           </Modal>
       </div>
     );
