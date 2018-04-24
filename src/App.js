@@ -6,6 +6,7 @@ import Layout from './hoc/Layout';
 import Photos from './containers/Photos/Photos';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
+import Upload from './containers/Upload/Upload';
 import './App.css';
 
 // class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/upload" component={Upload} />
         <Route path="/" exact component={Photos} />
         <Redirect to="/" />
       </Switch>
@@ -40,6 +42,7 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
+          <Route path="/upload" component={Upload} />
           <Route path="/" exact component={Photos} />
           <Redirect to="/" />
         </Switch>
