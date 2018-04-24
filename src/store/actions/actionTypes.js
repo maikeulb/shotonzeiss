@@ -1,4 +1,4 @@
-export const ADD_PHOTO = 'ADD_FILM';
+export const ADD_PHOTO = 'ADD_PHOTO';
 export const REMOVE_PHOTO = 'REMOVE_FILM';
 export const FETCH_SINGLE_PHOTO = 'FETCH_SINGLE_PHTO';
 export const FETCH_ALL_PHOTOS = 'FETCH_ALL_PHOTOS';

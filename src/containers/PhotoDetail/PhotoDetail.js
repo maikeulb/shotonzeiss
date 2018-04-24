@@ -23,7 +23,7 @@ class PhotoDetail extends Component {
     const photoButton =(
       <Button type="primary" onClick = {this.showModal}>
         <li>
-          <img src={ props.imageUrl } />
+          <img src={ props.photoUrl } />
           <div>
             <span>
               { props.user }
@@ -41,11 +41,11 @@ class PhotoDetail extends Component {
             onCancel={this.handleCancel}
             onCreate={this.handleCancel}
             <div>
-              <img src={ props.imageUrl} />
+              <img src={ props.photoUrl} />
               <div>
                 <h3> "{ props.title }" </h3>
               <Link to={`/user/${props.userId}`}>
-                <img src={ props.userImageUrl} />{ props.user }
+                <img src={ props.userPhotoUrl} />{ props.user }
               </Link>
               </div>
             </div>

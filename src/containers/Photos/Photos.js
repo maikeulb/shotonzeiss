@@ -40,10 +40,10 @@ class Photos extends Component {
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
           >
-          {images.map(image =>
+          {photos.map(photo =>
             <PhotoDetail
-              key={ image.id }
-              image={ image }
+              key={ photo.id }
+              photo={ photo }
               />)}
         </Masonry>
       </div>
