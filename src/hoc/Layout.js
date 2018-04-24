@@ -36,6 +36,12 @@ class Layout extends Component {
   }
 
   render () {
+    const auth = this.props.isAuthenticated ? 
+              (<Link to='/logout'><span>Logout</span></Link>):
+              (<Link to='/login'><span>Login</span></Link>)
+    const photos = this.props.isAuthenticated ? 
+              (<Menu.Item key="1"><Link to='/'><span>Photos</span></Link></Menu.Item>):
+              ("")
     return (
       <Aux>
         <AntLayout>
@@ -48,10 +54,11 @@ class Layout extends Component {
             onCollapse={(collapsed, type) => { }}
             collapsed={this.state.collapsed}>
             <Logo>
-              <img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" />
+              <Link to='/'><span><img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" /></span></Link>
             </Logo>
             <Menu theme="light" mode="inline" >
-              <Menu.Item key="1"><Link to='/photos'><span>Photos</span></Link></Menu.Item>
+              { photos }
+              <Menu.Item key="2">{ auth }</Menu.Item>
             </Menu>
           </Sider>
 
@@ -78,4 +85,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.user !== null
+    };
+};
+
+export default connect( mapStateToProps )( Layout );
