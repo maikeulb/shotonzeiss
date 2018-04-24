@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 import Layout from './hoc/Layout';
 import Photos from './containers/Photos/Photos';

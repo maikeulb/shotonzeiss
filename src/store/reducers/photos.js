@@ -4,20 +4,22 @@ import {updateObject} from '../utility'
 const initialState = {}
 
 const addPhoto = (state, action) => {
-    const updatedPhoto = {[action.photoName]: state.photos[action.photoName] + 1}
-    const updatedPhotos = updateObject(state.photos, updatedPhoto);
-    const updatedState = {
-        photos: updatedPhotos,
-    }
-    return updateObject(state, updatedState); };
+  const updatedPhoto = {[action.photoName]: state.photos[action.photoName] + 1}
+  const updatedPhotos = updateObject(state.photos, updatedPhoto);
+  const updatedState = {
+    photos: updatedPhotos,
+  }
+  return updateObject(state, updatedState); 
+};
 
 const removePhoto = (state, action) => {
-    const updatedPhos = {[action.photoName]: state.photos[action.photoName] - 1}
-    const updatedPho = updateObject(state.photos, updatedPho);
-    const updatedSt = {
-        photos: updatedPho,
-    }
-    return updateObject(state, updatedSt); };
+  const updatedPhos = {[action.photoName]: state.photos[action.photoName] - 1}
+  const updatedPho = updateObject(state.photos, updatedPhos);
+  const updatedSt = {
+    photos: updatedPho,
+  }
+  return updateObject(state, updatedSt); 
+};
 
 const fetchAllPhotosStart = ( state, action ) => {
   return updateObject( state, {  } );

@@ -3,18 +3,19 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import * as actions from './store/actions/index';
 import photosReducer from './store/reducers/photos';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const rootReducer = combineReducers({
+    photos: photosReducer
+});
 
 const store = createStore(
+  rootReducer, 
   compose(applyMiddleware(thunk))
 );
 
@@ -28,3 +29,4 @@ const app = (
 
 ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
+
