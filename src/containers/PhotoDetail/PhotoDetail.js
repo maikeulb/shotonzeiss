@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Modal, Button } from 'antd';
+// import { Link } from 'react-router-dom';
+// import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
+import './PhotoDetail.css';
 
 class PhotoDetail extends Component {
   state = {
@@ -21,13 +23,22 @@ class PhotoDetail extends Component {
 
   render() {
     const { photoUrl } = this.props.photo;
+    const style =  {
+      maxWidth: '300px',
+      padding: '5px'
+    }
+
     return(
       <div>
-         <img src={ photoUrl } alt="img"  onClick= {this.showModal}/>
+        <li>
+         <img src={ photoUrl } style={ style } alt="img"  onClick={ this.showModal }/>
+        </li>
           <Modal 
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={this.handleCancel}>
+            visible={ this.state.visible }
+            wrapClassName="vertical-center-modal"
+            footer={ null }
+            onCancel={ this.handleCancel }
+            onCreate={ this.handleCancel }>
             <img src={ photoUrl } alt="img" />
           </Modal>
       </div>

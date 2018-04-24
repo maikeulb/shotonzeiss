@@ -7,8 +7,9 @@ import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
 import Masonry from 'react-masonry-component';
 import axios from '../../axios-photos';
-// import { Spin } from 'antd';
+import { Spin } from 'antd';
 import * as actions from '../../store/actions/index';
+import { knuthShuffle } from 'knuth-shuffle';
 
 class Photos extends Component {
   componentDidMount() {
@@ -16,20 +17,11 @@ class Photos extends Component {
   }
 
   render() {
-
-    // // let photos = <Spin />;
-    // let photos = this.props.photos;
-    // if ( !this.props.loading ) {
-    //   photos = this.props.photos;
-    // }
-
-    const masonryOptions = {
-      transitionDuration: 1,
-      gutter: 0,
-      fitWidth: false
-    };
-
-    let photos = [
+    const style = {
+        margin: 'auto',
+        padding: '100px'
+    }
+    let propsphotos = [
       { id: 1, 
         photoUrl: "https://c2.staticflickr.com/8/7293/8742242967_b754f7500a_n.jpg" 
       },
@@ -51,24 +43,41 @@ class Photos extends Component {
       { id: 7, 
         photoUrl: "https://c2.staticflickr.com/4/3096/2492584968_af2f309c59_n.jpg" 
       },
+
       { id: 8, 
         photoUrl: "https://c2.staticflickr.com/4/3785/8990964850_df78fc8ac9_n.jpg" 
       },
+
+      { id: 9, 
+        photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg" 
+      },
+
      ]
 
+    let photos = <Spin />;
+    if ( !this.props.loading ) {
+      photos = propsphotos;
+      photos = knuthShuffle(propsphotos);
+    }
+
+    const masonryOptions = {
+      transitionDuration: 1,
+      fitWidth: false
+    };
+
     return (
-      <div>
-        <Masonry className={"photos-index"}
+      <div style = {style}>
+        <Masonry
           elementType={'ul'}
-          options={masonryOptions}
+          options={ masonryOptions }
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
           >
-          {photos.map(photo =>
+          { photos.map( photo =>
             <PhotoDetail
               key={ photo.id }
               photo={ photo }
-              />)}
+              />) }
         </Masonry>
       </div>
     );

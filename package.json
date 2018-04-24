@@ -6,6 +6,7 @@
     "antd": "^3.0.3",
     "axios": "^0.18.0",
     "firebase": "^4.13.1",
+    "knuth-shuffle": "^1.0.8",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-firebase-file-uploader": "^2.4.1",
