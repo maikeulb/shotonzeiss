@@ -3,6 +3,26 @@ import React, { Component } from 'react';
 // import { Modal, Button } from 'antd';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
+import styled from 'styled-components';
+
+const Img = styled.img `
+  width: 400px;
+  padding: 5px;
+
+  @media screen and (max-width: 400px){
+    width: 100%;
+  }
+`;
+
+const ImgModal = styled.img `
+  width: 600px;
+
+  @media screen and (max-width: 600px){
+    width: 100%;
+  }
+`;
+
+
 
 class PhotoDetail extends Component {
   state = {
@@ -23,23 +43,20 @@ class PhotoDetail extends Component {
 
   render() {
     const { photoUrl } = this.props.photo;
-    const style =  {
-      maxWidth: '300px',
-      padding: '5px'
-    }
 
     return(
       <div>
         <li>
-         <img src={ photoUrl } style={ style } alt="img"  onClick={ this.showModal }/>
+          <Img src={ photoUrl }  alt="img"  onClick={ this.showModal }></Img>
         </li>
           <Modal 
             visible={ this.state.visible }
             wrapClassName="vertical-center-modal"
+            width='500'
             footer={ null }
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>
-            <img src={ photoUrl } alt="img" />
+            <ImgModal src={ photoUrl } alt="img" />
           </Modal>
       </div>
     );

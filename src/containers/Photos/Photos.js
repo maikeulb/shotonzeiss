@@ -19,45 +19,80 @@ class Photos extends Component {
   render() {
     const style = {
         margin: 'auto',
-        padding: '100px'
+        paddingLeft: '20px'
     }
     let propsphotos = [
-      { id: 1, 
-        photoUrl: "https://c2.staticflickr.com/8/7293/8742242967_b754f7500a_n.jpg" 
-      },
-      { id: 2, 
-        photoUrl: "https://c2.staticflickr.com/8/7141/6638104147_b213425451_n.jpg"
-      },
-      { id: 3, 
-        photoUrl: "https://c1.staticflickr.com/9/8223/8310576116_bd991eaaff_n.jpg"
-      },
-      { id: 4, 
-        photoUrl: "https://c1.staticflickr.com/9/8260/8698921351_6ef81d94f0_n.jpg"
-      },
-      { id: 5, 
-        photoUrl: "https://c2.staticflickr.com/8/7096/6923520906_48d6e6cb14_n.jpg"
-      },
-      { id: 6, 
-        photoUrl: "https://c2.staticflickr.com/4/3240/2397777211_bde089af4f_n.jpg"
-      },
-      { id: 7, 
-        photoUrl: "https://c2.staticflickr.com/4/3096/2492584968_af2f309c59_n.jpg" 
-      },
-
-      { id: 8, 
-        photoUrl: "https://c2.staticflickr.com/4/3785/8990964850_df78fc8ac9_n.jpg" 
-      },
-
       { id: 9, 
+        photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg" 
+      },
+
+      { id: 10, 
         photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg" 
+      },
+
+      { id: 11, 
+        photoUrl: "https://c2.staticflickr.com/2/1008/5187060734_fe0f56630f_z.jpg" 
+      },
+
+      { id: 12, 
+        photoUrl: "https://c1.staticflickr.com/5/4131/5099175981_d81d3ced3a_z.jpg" 
+      },
+
+      { id: 13, 
+        photoUrl: "https://c2.staticflickr.com/2/1093/662891484_5ec3124166_o.jpg" 
+      },
+
+      { id: 14, 
+        photoUrl: "https://c1.staticflickr.com/3/2692/4244704338_440f9ac6c4_b.jpg" 
+      },
+
+      { id: 15, 
+        photoUrl: "https://c1.staticflickr.com/7/6221/6223676266_f0a8d1536b_b.jpg" 
+      },
+
+      { id: 16, 
+        photoUrl: "https://c1.staticflickr.com/5/4075/4914495090_ddd3695097_b.jpg" 
+      },
+
+      { id: 17, 
+        photoUrl: "https://c2.staticflickr.com/8/7051/6967003046_2859fa47ea_b.jpg" 
+      },
+
+      { id: 18, 
+        photoUrl: "https://c1.staticflickr.com/9/8223/8310576116_bd991eaaff_b.jpg" 
+      },
+
+      { id: 19, 
+        photoUrl: "https://c2.staticflickr.com/4/3240/2397777211_bde089af4f_b.jpg" 
+      },
+
+      { id: 20, 
+        photoUrl: "https://c1.staticflickr.com/9/8127/8989452243_ce77f86527_b.jpg" 
+      },
+
+      { id: 21, 
+        photoUrl: "https://c2.staticflickr.com/8/7141/6638104147_b213425451_b.jpg" 
+      },
+
+      { id: 22, 
+        photoUrl: "https://c1.staticflickr.com/9/8260/8698921351_6ef81d94f0_b.jpg" 
+      },
+
+      { id: 23, 
+        photoUrl: "https://c2.staticflickr.com/4/3708/9475261399_acd7f52899_b.jpg" 
+      },
+
+      { id: 24, 
+        photoUrl: "https://c2.staticflickr.com/8/7317/12124091956_3c18c9004e_b.jpg"
       },
 
      ]
 
+
     let photos = <Spin />;
     if ( !this.props.loading ) {
       photos = propsphotos;
-      photos = knuthShuffle(propsphotos);
+      // photos = knuthShuffle(propsphotos);
     }
 
     const masonryOptions = {
