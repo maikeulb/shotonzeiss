@@ -3,7 +3,7 @@ import axios from '../../axios-photos';
 
 export const uploadInit = () => {
   return {
-    type: actionTypes.UPLOAD_INIT
+    type: actionTypes.UPLOAD_PHOTO_INIT
   };
 };
 
@@ -54,28 +54,28 @@ export const fetchSinglePhotoStart = () => {
 
 export const fetchUserPhotoStart = () => {
   return {
-    type: actionTypes.FETCH_USER_PHOTO_START
+    type: actionTypes.FETCH_USER_PHOTOS_START
   };
 };
 
 export const fetchAllPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_ALL_PHOTOS_SUCCESS,
-    photoData: photoData // has username
+    photos: photos// has username
   };
 };
 
 export const fetchSinglePhotoSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_SINGLE_PHOTO_SUCCESS,
-    photoData: photoData // has username
+    photos: photos // has username
   };
 };
 
 export const fetchUserPhotoSuccess = ( photos ) => {
   return {
-    type: actionTypes.FETCH_USER_PHOTO_SUCCESS,
-    photoData: photoData // has username
+    type: actionTypes.FETCH_USER_PHOTOS_SUCCESS,
+    photos: photos // has username
   };
 };
 
@@ -119,7 +119,7 @@ export const fetchSinglePhoto = (photoId) => {
               id: key
           } );
         }
-        dispatch(fetchSinglePhotoSuccess(fetchedSinglePhoto));
+        dispatch(fetchSinglePhotoSuccess(fetchedPhoto));
       } )
     .catch( err => {
       dispatch(fetchPhotosFail(err));
@@ -129,13 +129,13 @@ export const fetchSinglePhoto = (photoId) => {
 
 export const fetchUserPhoto = (userId) => {
   return dispatch => {
-    dispatch(fetchSinglePhotoStart());
+    dispatch(fetchUserPhotoStart());
     const queryParams = '?&orderBy="userId"&equalTo="' + userId + '"';
     axios.get( '/photos.json' + queryParams )
       .then( res => {
-        const fetchedPhoto = [];
+        const fetchedPhotos = [];
         for ( let key in res.data ) {
-          fetchedPhoto.push( {
+          fetchedPhotos.push( {
               ...res.data[key],
               id: key
           } );

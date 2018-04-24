@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-// import { Modal, Button } from 'antd';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';

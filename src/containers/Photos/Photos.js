@@ -13,8 +13,8 @@ import { knuthShuffle } from 'knuth-shuffle';
 import styled from 'styled-components';
 
 const Container= styled.div `
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 60px;
+  margin-right: 50px;
 
   @media screen and (max-width: 700px){
     margin-left: 0;
@@ -114,7 +114,6 @@ class Photos extends Component {
           options={ masonryOptions }
           disableImagesLoaded={ false }
           updateOnEachImageLoad={ false }
-        	style={ style }
           >
           { photoDetails }
         </Masonry>
@@ -127,16 +126,15 @@ class Photos extends Component {
 
 const mapStateToProps = state => {
   return {
-    photos: state.photos.photos
-    loading: state.order.loading,
-    user: state.auth.user,
-    userId: state.auth.user.uid
+    photos: state.photos.photos,
+    loading: state.photos.loading,
+    user: state.auth.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() )
+    onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() ),
     onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto() )
   };
 };

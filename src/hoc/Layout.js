@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Aux from './Aux';
 import { Layout as AntLayout, Menu, Icon } from 'antd';

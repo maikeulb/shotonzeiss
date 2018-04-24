@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Layout from './hoc/Layout';
@@ -40,7 +40,7 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Photos} />
           <Redirect to="/" />
         </Switch>
       );
