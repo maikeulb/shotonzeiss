@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import styled from 'styled-components';
+import { Spin, Button } from 'antd';
 
 const Img = styled.img `
   max-width: 600px;
@@ -12,28 +13,19 @@ const Img = styled.img `
   }
 `;
 
-class ProfilePage extends Component {
+class Upload extends Component {
   state = {
     photo: '',
     isUploading: false,
-    progress: 0,
+    isUploaded: false,
     photoUrl: ''
-  };
-
-  handleChangePhoto = (e) => {
-    const photo = e.target.files[0];
-    if (photo) {
-      this.setState({
-        photo
-      });
-    }
   };
 
   handleUploadSuccess = (filename) => {
     this.setState({
       photo: filename, 
-      progress: 100, 
-      isUploading: false
+      isUploading: false,
+      isUploaded: true
     });
     firebase.storage().ref('photos').child(filename).getDownloadURL()
       .then(url => this.setState({
@@ -44,53 +36,67 @@ class ProfilePage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({
+      isUploading: false,
+      isUploaded: false
+    });
     firebase.database().ref('photos').push(this.state.photoUrl);
   };
 
   handleUploadStart = () => {
     this.setState({
       isUploading: true, 
-      progress: 0
-    });
-  };
-
-  handleProgress = (progress) => {
-    this.setState({
-      progress
+      isUploaded: false, 
     });
   };
 
   handleUploadError = (error) => {
     this.setState({
-      isUploading: false
+      isUploading: false,
+      isUploaded: false, 
     });
     console.error(error);
   };
 
   render() {
+    let button = (
+      <Button type="button">
+        <label for="uploader">
+        <FileUploader
+          hidden
+          id="uploader"
+          accept="image/*"
+          randomizeFilename
+          storageRef={firebase.storage().ref('photos')}
+          onUploadStart={this.handleUploadStart}
+          onUploadError={this.handleUploadError}
+          onUploadSuccess={this.handleUploadSuccess}
+        />
+          UPLOAD
+        </label>
+      </Button>
+    );
+
+    if (this.state.isUploaded) {
+      button = <Button type="submit" >SUBMIT</Button>
+    };
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           {this.state.isUploading &&
-            <p>Progress: {this.state.progress}</p>
+            <Spin />
           }
           {this.state.photoUrl &&
             <Img src={this.state.photoUrl} alt="img" />
           }
-          <FileUploader
-            accept="image/*"
-            randomizeFilename
-            storageRef={firebase.storage().ref('photos')}
-            onUploadStart={this.handleUploadStart}
-            onUploadError={this.handleUploadError}
-            onUploadSuccess={this.handleUploadSuccess}
-            onProgress={this.handleProgress}
-          />
-          <button type="submit" >SUBMIT</button>
+          <div>
+            { button }
+          </div>
         </form>
       </div>
     );
   }
 }
 
-export default ProfilePage;
+export default Upload;
