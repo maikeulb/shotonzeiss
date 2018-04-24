@@ -20,7 +20,7 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    let photoButton =(
+    const photoButton =(
       <Button type="primary" onClick = {this.showModal}>
         <li>
           <img src={ props.imageUrl } />
