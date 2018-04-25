@@ -10,22 +10,22 @@ import * as actions from '../../store/actions/index';
 import styled from 'styled-components';
 
 class User extends Component {
-  state = {
-    type: "photos",
-  };
-
   componentDidMount() {
     // this.props.onFetchUserProfile(this.props.match.params.userId);
     // this.props.onFetchUserPhotos(this.props.match.params.userId);
+  console.log(this.props.match.params.id)
   }
-
   render() {
-    let { userId, username } = this.props.user;
+    let propsUser = { 
+      userId: 1, 
+      username: "mike@gmail.com"
+    };
 
+    let { userId, username } = propsUser;
     return (
       <div>
-        username
-        <UserPhotos userId={userId}/>
+        <h1>{ username }</h1>
+        <UserPhotos userId={ userId }/>
       </div>
     );
   }
@@ -33,13 +33,15 @@ class User extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    // user: state.users.user,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onFetchUserProfile: (userId) => dispatch(actions.fetchUserProfile(userId)),
-  onFetchUserPhotos: (userId) => dispatch(actions.fetchUserPhotos(userId)),
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUserProfile: (userId) => dispatch(actions.fetchUserProfile(userId)),
+    onFetchUserPhotos: (userId) => dispatch(actions.fetchUserPhotos(userId)),
+  };
+};
 
 export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( User, axios ) );

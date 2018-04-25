@@ -38,7 +38,8 @@ class Photos extends Component {
 	}
 
   render() {
-    let propsphotos = [
+
+    let propsPhotos = [
       { id: 9, 
         photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg" 
       },
@@ -91,7 +92,7 @@ class Photos extends Component {
 
     let photos = <Spin />;
     if ( !this.props.loading ) {
-      photos = knuthShuffle(propsphotos);
+      photos = knuthShuffle(propsPhotos);
     }
 
     const masonryOptions = {

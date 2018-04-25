@@ -17,6 +17,7 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/upload" component={Upload} />
+        <Route path="/users/:id" component={User} />
         <Route path="/" exact component={Photos} />
         <Redirect to="/" />
       </Switch>
@@ -28,7 +29,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/upload" component={Upload} />
-          <Route path="/user" component={User} />
+          <Route path="/users/:id" component={User} />
           <Route path="/" exact component={Photos} />
           <Redirect to="/" />
         </Switch>

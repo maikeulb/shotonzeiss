@@ -59,7 +59,7 @@ class Layout extends Component {
             </Logo>
             <Menu theme="light" mode="inline" >
               { photos }
-              <Menu.Item key="2">{ auth }</Menu.Item>
+              <Menu.Item key="3">{ auth }</Menu.Item>
             </Menu>
           </Sider>
 

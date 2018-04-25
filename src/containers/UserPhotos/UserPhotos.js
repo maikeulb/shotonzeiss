@@ -90,7 +90,7 @@ class UserPhotos extends Component {
 const mapStateToProps = state => {
   return {
     photos: state.photos.photos,
-    loading: state.user.loading,
+    // loading: state.user.loading,
   };
 };
 
