@@ -20,3 +20,9 @@ export {
   setAuthRedirectPath,
   verifyAuth,
 } from './auth';
+export {
+  fetchUserProfile,
+  fetchUserProfileSuccess,
+  fetchUserProfileStart,
+  fetchProfileFail
+} from './users';
