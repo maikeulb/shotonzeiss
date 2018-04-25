@@ -3,12 +3,6 @@ import axios from '../../axios-photos';
 
 export const fetchUserProfileStart = () => {
   return {
-    type: actionTypes.FETCH_SINGLE_PHOTO_START
-  };
-};
-
-export const fetchUserProfileStart = () => {
-  return {
     type: actionTypes.FETCH_USER_PROFILE_START
   };
 };

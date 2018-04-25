@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
 
-import Photos from './Photos/Photos';
+import UserPhotos from '../UserPhotos/UserPhotos';
 
 import axios from '../../axios-photos';
 import * as actions from '../../store/actions/index';
@@ -16,26 +15,22 @@ class User extends Component {
   };
 
   componentDidMount() {
-    // this.props.onFetchUserProfile(this.props.match.params.id);
-    // this.props.onFetchUserPhotos(this.props.match.params.id);
+    // this.props.onFetchUserProfile(this.props.match.params.userId);
+    // this.props.onFetchUserPhotos(this.props.match.params.userId);
   }
 
   render() {
     let { userId, username } = this.props.user;
 
-    let personalButton = <Upload />;
-
     return (
       <div>
         username
-      </div>
-      <div>
-        <Photos userId={userId}/>
+        <UserPhotos userId={userId}/>
       </div>
     );
   }
-
 }
+
 const mapStateToProps = state => {
   return {
     user: state.user.user,

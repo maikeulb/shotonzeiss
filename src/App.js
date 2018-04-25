@@ -7,24 +7,9 @@ import Photos from './containers/Photos/Photos';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import Upload from './containers/Upload/Upload';
+import User from './containers/User/User';
 import './App.css';
 
-// class App extends Component {
-//   render () {
-//     let routes = (
-//         <Route path="/" exact component={Photos} />
-//     );
-//     return (
-//       <div className="App">
-//         <Layout>
-//           {routes}
-//         </Layout>
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
 
 class App extends Component {
   render () {
@@ -43,6 +28,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/upload" component={Upload} />
+          <Route path="/user" component={User} />
           <Route path="/" exact component={Photos} />
           <Redirect to="/" />
         </Switch>

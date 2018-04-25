@@ -9,9 +9,9 @@ export {
   fetchSinglePhoto,
   fetchSinglePhotoSuccess,
   fetchSinglePhotoStart,
-  fetchUserPhoto,
-  fetchUserPhotoSuccess,
-  fetchUserPhotoStart,
+  fetchUserPhotos,
+  fetchUserPhotosSuccess,
+  fetchUserPhotosStart,
   fetchPhotosFail
 } from './photos';
 export {

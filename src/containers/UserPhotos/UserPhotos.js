@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
-import axios from '../../axios-orders';
+import axios from '../../axios-photos';
 
 import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
@@ -12,20 +12,20 @@ import Masonry from 'react-masonry-component';
 import styled from 'styled-components';
 import { knuthShuffle } from 'knuth-shuffle';
 
+const Container= styled.div `
+  margin-left: 60px;
+  margin-right: 50px;
+
+  @media screen and (max-width: 700px){
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
+
 class UserPhotos extends Component {
   // componentWillReceiveProps(nextProps) {
     // this.setState({ photos: nextProps.photos });
   // }
-
-  const Container= styled.div `
-    margin-left: 60px;
-    margin-right: 50px;
-
-    @media screen and (max-width: 700px){
-      margin-left: 0;
-      margin-right: 0;
-    }
-  `;
 
   state = {
     layoutReady: false
@@ -89,9 +89,8 @@ class UserPhotos extends Component {
 
 const mapStateToProps = state => {
   return {
-    photos: state.user.photos,
+    photos: state.photos.photos,
     loading: state.user.loading,
-    user: state.user.user
   };
 };
 
