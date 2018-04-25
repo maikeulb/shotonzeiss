@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';
-import { Card } from 'antd';
 
-const { Meta } = Card;
 
 const Img = styled.img `
   width: 400px;
