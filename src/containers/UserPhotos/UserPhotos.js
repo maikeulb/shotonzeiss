@@ -38,24 +38,32 @@ class UserPhotos extends Component {
 	}
 
   render() {
-    let propsphotos = [
+    let propsPhotos = [
       { id: 9, 
-        photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 10, 
-        photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg", 
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 11, 
-        photoUrl: "https://c2.staticflickr.com/2/1008/5187060734_fe0f56630f_z.jpg" 
+        photoUrl: "https://c2.staticflickr.com/2/1008/5187060734_fe0f56630f_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
-      { id: 17, 
-        photoUrl: "https://c2.staticflickr.com/8/7051/6967003046_2859fa47ea_b.jpg" 
+      { id: 12, 
+        photoUrl: "https://c1.staticflickr.com/5/4131/5099175981_d81d3ced3a_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
-     ]
+     ];
 
     let photos = <Spin />;
     if ( !this.props.loading ) {
-      photos = knuthShuffle(propsphotos);
+      photos = knuthShuffle(propsPhotos);
     }
 
     let masonryOptions = {

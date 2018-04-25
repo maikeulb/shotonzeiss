@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';
@@ -51,7 +51,7 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    const { photoUrl } = this.props.photo;
+    const { photoUrl, username, userId } = this.props.photo;
 
     return(
       <div>
@@ -67,7 +67,9 @@ class PhotoDetail extends Component {
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
             <Footer>
-              <h3>username</h3>
+              <Link to={`/users/${userId}`}>
+              <h3> { username } </h3>
+              </Link>
            </Footer>
           </Modal>
       </div>

@@ -41,54 +41,86 @@ class Photos extends Component {
 
     let propsPhotos = [
       { id: 9, 
-        photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 10, 
-        photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3851/14586984988_be404b8229.jpg", 
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 11, 
-        photoUrl: "https://c2.staticflickr.com/2/1008/5187060734_fe0f56630f_z.jpg" 
+        photoUrl: "https://c2.staticflickr.com/2/1008/5187060734_fe0f56630f_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 12, 
-        photoUrl: "https://c1.staticflickr.com/5/4131/5099175981_d81d3ced3a_z.jpg" 
+        photoUrl: "https://c1.staticflickr.com/5/4131/5099175981_d81d3ced3a_z.jpg",
+        username: "michael@gmail.com",
+        userId: 1
       },
       { id: 13, 
-        photoUrl: "https://c2.staticflickr.com/2/1093/662891484_5ec3124166_o.jpg" 
+        photoUrl: "https://c2.staticflickr.com/2/1093/662891484_5ec3124166_o.jpg",
+        username: "trish@gmail.com",
+        userId: 2
       },
       { id: 14, 
-        photoUrl: "https://c1.staticflickr.com/3/2692/4244704338_440f9ac6c4_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/3/2692/4244704338_440f9ac6c4_b.jpg",
+        username: "trish@gmail.com",
+        userId: 2
       },
       { id: 15, 
-        photoUrl: "https://c1.staticflickr.com/7/6221/6223676266_f0a8d1536b_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/7/6221/6223676266_f0a8d1536b_b.jpg",
+        username: "trish@gmail.com",
+        userId: 2
       },
       { id: 16, 
-        photoUrl: "https://c1.staticflickr.com/5/4075/4914495090_ddd3695097_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/5/4075/4914495090_ddd3695097_b.jpg",
+        username: "trish@gmail.com",
+        userId: 2
       },
       { id: 17, 
-        photoUrl: "https://c2.staticflickr.com/8/7051/6967003046_2859fa47ea_b.jpg" 
+        photoUrl: "https://c2.staticflickr.com/8/7051/6967003046_2859fa47ea_b.jpg",
+        username: "trish@gmail.com",
+        userId: 2
       },
       { id: 18, 
-        photoUrl: "https://c1.staticflickr.com/9/8223/8310576116_bd991eaaff_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/9/8223/8310576116_bd991eaaff_b.jpg",
+        username: "jake@gmail.com",
+        userId: 3
       },
       { id: 19, 
-        photoUrl: "https://c2.staticflickr.com/4/3240/2397777211_bde089af4f_b.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3240/2397777211_bde089af4f_b.jpg",
+        username: "jake@gmail.com",
+        userId: 3
       },
       { id: 20, 
-        photoUrl: "https://c1.staticflickr.com/9/8127/8989452243_ce77f86527_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/9/8127/8989452243_ce77f86527_b.jpg",
+        username: "jake@gmail.com",
+        userId: 3
       },
       { id: 21, 
-        photoUrl: "https://c2.staticflickr.com/8/7141/6638104147_b213425451_b.jpg" 
+        photoUrl: "https://c2.staticflickr.com/8/7141/6638104147_b213425451_b.jpg",
+        username: "jake@gmail.com",
+        userId: 3
       },
       { id: 22, 
-        photoUrl: "https://c1.staticflickr.com/9/8260/8698921351_6ef81d94f0_b.jpg" 
+        photoUrl: "https://c1.staticflickr.com/9/8260/8698921351_6ef81d94f0_b.jpg",
+        username: "chris@gmail.com",
+        userId: 4
       },
       { id: 23, 
-        photoUrl: "https://c2.staticflickr.com/4/3708/9475261399_acd7f52899_b.jpg" 
+        photoUrl: "https://c2.staticflickr.com/4/3708/9475261399_acd7f52899_b.jpg",
+        username: "chris@gmail.com",
+        userId: 4
       },
       { id: 24, 
-        photoUrl: "https://c2.staticflickr.com/8/7317/12124091956_3c18c9004e_b.jpg"
+        photoUrl: "https://c2.staticflickr.com/8/7317/12124091956_3c18c9004e_b.jpg",
+        username: "chris@gmail.com",
+        userId: 4
       },
-     ]
+     ];
 
     let photos = <Spin />;
     if ( !this.props.loading ) {

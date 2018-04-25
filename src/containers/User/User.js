@@ -8,6 +8,11 @@ import UserPhotos from '../UserPhotos/UserPhotos';
 import axios from '../../axios-photos';
 import * as actions from '../../store/actions/index';
 import styled from 'styled-components';
+import { Divider } from 'antd';
+
+const Header= styled.h1 `
+`;
+
 
 class User extends Component {
   componentDidMount() {
@@ -24,7 +29,7 @@ class User extends Component {
     let { userId, username } = propsUser;
     return (
       <div>
-        <h1>{ username }</h1>
+        <Divider orientation="right"> <Header> { username } </Header> </Divider>
         <UserPhotos userId={ userId }/>
       </div>
     );
