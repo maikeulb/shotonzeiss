@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Aux from './Aux';
-import { Layout as AntLayout, Menu, Icon } from 'antd';
+import { Layout as AntLayout, Menu, Icon, Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
@@ -29,6 +29,7 @@ const Logo = styled.div`
 class Layout extends Component {
   state = {
     collapsed: true,
+    visible: false
   }
 
   toggle = () => {
@@ -37,16 +38,29 @@ class Layout extends Component {
     });
   }
 
+  showModal = () => {
+    this.setState({ 
+      visible: true,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({ 
+      visible: false 
+    });
+  }
+
   render () {
     const profile = this.props.isAuthenticated ? 
               (<Menu.Item key="1"><Link to='/users/1'><span>Profile</span></Link></Menu.Item>):
               ("")
     const upload = this.props.isAuthenticated ? 
-              (<Menu.Item key="2"><Link to='/upload'><span>Upload</span></Link></Menu.Item>):
+              (<Menu.Item key="2"><span onClick={ this.showModal }>Upload</span></Menu.Item>):
               ("")
     const auth = this.props.isAuthenticated ? 
               (<Link to='/logout'><span>Logout</span></Link>):
               (<Link to='/login'><span>Login</span></Link>)
+
     return (
       <Aux>
         <AntLayout>
@@ -79,6 +93,14 @@ class Layout extends Component {
           <Content style={{ textAlign: 'center' }}>
             <main>
               {this.props.children}
+              <Modal 
+                visible={ this.state.visible }
+                wrapClassName="vertical-center-modal"
+                width='500'
+                onCancel={ this.handleCancel }
+                onCreate={ this.handleCancel }>
+                 <Upload/>
+              </Modal>
             </main>
           </Content>
           <Footer style={{ textAlign: 'center' }}>

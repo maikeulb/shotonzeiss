@@ -18,14 +18,16 @@ class Upload extends Component {
     photo: '',
     isUploading: false,
     isUploaded: false,
-    photoUrl: ''
+    photoUrl: '',
+    visible: ''
   };
 
   handleUploadSuccess = (filename) => {
     this.setState({
       photo: filename, 
       isUploading: false,
-      isUploaded: true
+      isUploaded: true,
+      visible: true,
     });
     firebase.storage().ref('photos').child(filename).getDownloadURL()
       .then(url => this.setState({
@@ -38,7 +40,8 @@ class Upload extends Component {
     e.preventDefault();
     this.setState({
       isUploading: false,
-      isUploaded: false
+      isUploaded: false,
+      visible: false
     });
     firebase.database().ref('photos').push(this.state.photoUrl);
   };

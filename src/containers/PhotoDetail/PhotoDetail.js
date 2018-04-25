@@ -57,6 +57,7 @@ class PhotoDetail extends Component {
         <Li>
           <Img src={ photoUrl }  alt="img"  onClick={ this.showModal }></Img>
         </Li>
+
           <Modal 
             visible={ this.state.visible }
             wrapClassName="vertical-center-modal"
@@ -71,6 +72,7 @@ class PhotoDetail extends Component {
               </Link>
            </Footer>
           </Modal>
+
       </div>
     );
   }
