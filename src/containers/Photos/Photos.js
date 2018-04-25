@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
+import axios from '../../axios-photos';
 
 import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
-import Masonry from 'react-masonry-component';
-import axios from '../../axios-photos';
 import { Spin } from 'antd';
-import * as actions from '../../store/actions/index';
-import { knuthShuffle } from 'knuth-shuffle';
+import Masonry from 'react-masonry-component';
 import styled from 'styled-components';
+import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
   margin-left: 60px;
@@ -38,7 +38,6 @@ class Photos extends Component {
 	}
 
   render() {
-
     let propsphotos = [
       { id: 9, 
         photoUrl: "https://c2.staticflickr.com/4/3261/3228647240_ff320e465f_z.jpg" 
@@ -135,7 +134,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAllPhotos: () => dispatch( actions.fetchAllPhotos() ),
-    onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto() )
+    onFetchSinglePhoto: (photoId) => dispatch( actions.fetchSinglePhoto(photoId) )
   };
 };
 
