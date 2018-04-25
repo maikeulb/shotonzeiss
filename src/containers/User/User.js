@@ -16,8 +16,8 @@ class User extends Component {
   };
 
   componentDidMount() {
-    // this.props.fetchUserProfile(this.props.match.params.id);
-    // this.props.fetchUserPhotos(this.props.match.params.id);
+    // this.props.onFetchUserProfile(this.props.match.params.id);
+    // this.props.onFetchUserPhotos(this.props.match.params.id);
   }
 
   render() {
