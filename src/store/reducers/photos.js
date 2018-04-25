@@ -77,19 +77,20 @@ const fetchPhotosFail = ( state, action ) => {
 };
 
 const reducer = (state=initialState, action) => {
-    switch(action.type) {
-        case actionTypes.UPLOAD_PHOTO_INIT: return uploadInit(state, action);
-        case actionTypes.UPLOAD_PHOTO_START: return uploadPhotoStart(state, action);
-        case actionTypes.UPLOAD_PHOTO_SUCCESS: return uploadPhotoSuccess(state, action);
-        case actionTypes.UPLOAD_PHOTO_FAIL: return uploadPhotoFail(state, action);
-        case actionTypes.FETCH_ALL_PHOTOS_START: return fetchAllPhotosStart(state, action);
-        case actionTypes.FETCH_ALL_PHOTOS_SUCCESS: return fetchAllPhotosSuccess(state, action);
-        case actionTypes.FETCH_SINGLE_PHOTO_START: return fetchSinglePhotoStart(state, action);
-        case actionTypes.FETCH_SINGLE_PHOTO_SUCCESS: return fetchSinglePhotoSuccess(state, action);
-        case actionTypes.FETCH_USER_PHOTOS_START: return fetchUserPhotosStart(state, action);
-        case actionTypes.FETCH_USER_PHOTOS_SUCCESS: return fetchUserPhotosSuccess(state, action);
-        case actionTypes.FETCH_PHOTOS_FAIL: return fetchPhotosFail(state, action);
-        default: return state; }
+  switch(action.type) {
+    case actionTypes.UPLOAD_PHOTO_INIT: return uploadInit(state, action);
+    case actionTypes.UPLOAD_PHOTO_START: return uploadPhotoStart(state, action);
+    case actionTypes.UPLOAD_PHOTO_SUCCESS: return uploadPhotoSuccess(state, action);
+    case actionTypes.UPLOAD_PHOTO_FAIL: return uploadPhotoFail(state, action);
+    case actionTypes.FETCH_ALL_PHOTOS_START: return fetchAllPhotosStart(state, action);
+    case actionTypes.FETCH_ALL_PHOTOS_SUCCESS: return fetchAllPhotosSuccess(state, action);
+    case actionTypes.FETCH_SINGLE_PHOTO_START: return fetchSinglePhotoStart(state, action);
+    case actionTypes.FETCH_SINGLE_PHOTO_SUCCESS: return fetchSinglePhotoSuccess(state, action);
+    case actionTypes.FETCH_USER_PHOTOS_START: return fetchUserPhotosStart(state, action);
+    case actionTypes.FETCH_USER_PHOTOS_SUCCESS: return fetchUserPhotosSuccess(state, action);
+    case actionTypes.FETCH_PHOTOS_FAIL: return fetchPhotosFail(state, action);
+    default: return state; 
+  }
 };
 
 export default reducer
