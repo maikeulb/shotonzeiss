@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';
+import { Card } from 'antd';
+
+const { Meta } = Card;
 
 const Img = styled.img `
   width: 400px;
@@ -14,11 +17,16 @@ const Img = styled.img `
 `;
 
 const ImgModal = styled.img `
-  width: 600px;
+  width: 500px;
+  margin: 2px;
 
   @media screen and (max-width: 600px){
     width: 100%;
   }
+`;
+
+const Footer = styled.div `
+  paddingTop: 10px;
 `;
 
 const Li = styled.div `
@@ -57,7 +65,10 @@ class PhotoDetail extends Component {
             footer={ null }
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>
-            <ImgModal src={ photoUrl } alt="img" />
+              <ImgModal src={ photoUrl } alt="img" />
+            <Footer>
+              <h3>username</h3>
+           </Footer>
           </Modal>
       </div>
     );

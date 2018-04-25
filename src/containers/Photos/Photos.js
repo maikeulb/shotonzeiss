@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import withErrorHandler from '../../hoc//withErrorHandler';
+import withErrorHandler from '../../hoc/withErrorHandler';
 
 import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
