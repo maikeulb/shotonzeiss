@@ -29,6 +29,7 @@ const Footer = styled.div `
 
 const Li = styled.div `
   list-style-type: none;
+  cursor: pointer;
 `;
 
 class PhotoDetail extends Component {

@@ -7,6 +7,7 @@ import { Layout as AntLayout, Menu, Icon } from 'antd';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
+import Upload from '../containers/Upload/Upload';
 const { Header, Content, Footer, Sider } = AntLayout;
 
 const Trigger = styled.div`
@@ -37,12 +38,15 @@ class Layout extends Component {
   }
 
   render () {
+    const profile = this.props.isAuthenticated ? 
+              (<Menu.Item key="1"><Link to='/users/1'><span>Profile</span></Link></Menu.Item>):
+              ("")
+    const upload = this.props.isAuthenticated ? 
+              (<Menu.Item key="2"><Link to='/upload'><span>Upload</span></Link></Menu.Item>):
+              ("")
     const auth = this.props.isAuthenticated ? 
               (<Link to='/logout'><span>Logout</span></Link>):
               (<Link to='/login'><span>Login</span></Link>)
-    const photos = this.props.isAuthenticated ? 
-              (<Menu.Item key="1"><Link to='/'><span>Photos</span></Link></Menu.Item>):
-              ("")
     return (
       <Aux>
         <AntLayout>
@@ -58,30 +62,31 @@ class Layout extends Component {
               <Link to='/'><span><img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" /></span></Link>
             </Logo>
             <Menu theme="light" mode="inline" >
-              { photos }
+              { profile }
+              { upload }
               <Menu.Item key="3">{ auth }</Menu.Item>
             </Menu>
           </Sider>
 
         <AntLayout style={{ height:"100vh" }}>
-            <Header style={{ background: '#fff', padding: 0 }}>
-              <Trigger>
-                <Icon
-                  type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                  onClick={this.toggle}/>
-                </Trigger>
-            </Header>
-            <Content style={{ textAlign: 'center' }}>
-              <main>
-                {this.props.children}
-              </main>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>
-              ©2018
-            </Footer>
-          </AntLayout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Trigger>
+              <Icon
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggle}/>
+              </Trigger>
+          </Header>
+          <Content style={{ textAlign: 'center' }}>
+            <main>
+              {this.props.children}
+            </main>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            ©2018
+          </Footer>
         </AntLayout>
-      </Aux>
+      </AntLayout>
+    </Aux>
     )
   }
 }
