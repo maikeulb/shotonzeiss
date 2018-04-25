@@ -6,10 +6,10 @@ import styled from 'styled-components';
 
 
 const Img = styled.img `
-  width: 400px;
+  width: 350px;
   padding: 5px;
 
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: 350px){
     width: 100%;
   }
 `;
@@ -62,6 +62,7 @@ class PhotoDetail extends Component {
             visible={ this.state.visible }
             wrapClassName="vertical-center-modal"
             width='500'
+            closable={ false }
             footer={ null }
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>

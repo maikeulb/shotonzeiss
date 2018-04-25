@@ -14,7 +14,7 @@ import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
   margin-left: 60px;
-  margin-right: 50px;
+  margin-right: 0px;
 
   @media screen and (max-width: 700px){
     margin-left: 0;
@@ -33,7 +33,9 @@ class Photos extends Component {
 
   handleLayoutReady = () => {
 		if (!this.state.layoutReady) {
-			this.setState({ layoutReady: true });
+      this.setState({ 
+        layoutReady: true 
+      });
 		}
 	}
 
@@ -58,14 +60,21 @@ class Photos extends Component {
 
     const masonry = (
       <Container>
+        <div style={{
+					visibility: (this.state.layoutReady)
+						? 'visible'
+						: 'hidden', 
+        }}>
         <Masonry
           elementType={'ul'}
           options={ masonryOptions }
           disableImagesLoaded={ false }
+					onLayoutComplete={this.handleLayoutReady}
           updateOnEachImageLoad={ false }
           >
           { photoDetails }
         </Masonry>
+      </div>
       </Container>
     );
 

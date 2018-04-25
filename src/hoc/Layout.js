@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import Aux from './Aux';
 import { Layout as AntLayout, Menu, Icon, Modal } from 'antd';
@@ -19,18 +20,70 @@ const Trigger = styled.div`
 `;
 
 const Logo = styled.div`
-  height: 100px;
+  height: 88px;
   background: rgba(255,255,255,.2);
   margin: 16px;
-  padding: 0 10px;
+  padding: 0 0px;
   font-weight: bold;
 `;
 
 class Layout extends Component {
   state = {
+    photo: '',
+    photoUrl: '',
+    isUploading: false,
+    isUploaded: false,
+    visible: false,
     collapsed: true,
-    visible: false
-  }
+  };
+
+  handleUploadSuccess = (filename) => {
+    this.setState({
+      photo: filename, 
+      isUploading: false,
+      isUploaded: true,
+    });
+    firebase.storage().ref('photos').child(filename).getDownloadURL()
+      .then(url => this.setState({
+        photoUrl: url
+      })
+    );
+  };
+
+  // handleChangePhoto = (e) => {
+  //   console.log('im called')
+  //   const photo = e.target.files[0];
+  //   if (photo) {
+  //     this.setState({photo});
+  //   }
+  // };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      photo: '', 
+      photoUrl: '', 
+      isUploading: false,
+      isUploaded: false,
+      visible: false,
+    });
+    firebase.database().ref('photos').push(this.state.photoUrl);
+  };
+
+  handleUploadStart = () => {
+    this.setState({
+      isUploading: true, 
+      isUploaded: false, 
+    });
+  };
+
+  handleUploadError = (error) => {
+    this.setState({
+      isUploading: false,
+      isUploaded: false, 
+    });
+    console.error(error);
+  };
 
   toggle = () => {
     this.setState({
@@ -68,12 +121,12 @@ class Layout extends Component {
             trigger={null}
             collapsedWidth="0"
             breakpoint="md"
-            width="140"
+            width="120"
             collapsible
             onCollapse={(collapsed, type) => { }}
             collapsed={this.state.collapsed}>
             <Logo>
-              <Link to='/'><span><img style={{ maxWidth: "100px"}} src={logo} alt="zeiss" /></span></Link>
+              <Link to='/'><span><img style={{ maxWidth: "88px"}} src={logo} alt="zeiss" /></span></Link>
             </Logo>
             <Menu theme="light" mode="inline" >
               { profile }
@@ -97,9 +150,20 @@ class Layout extends Component {
                 visible={ this.state.visible }
                 wrapClassName="vertical-center-modal"
                 width='500'
+                closable={false}
+                footer={null}
                 onCancel={ this.handleCancel }
                 onCreate={ this.handleCancel }>
-                 <Upload/>
+                <Upload
+                   handleUploadStart={this.handleUploadStart} 
+                   handleUploadError={this.handleUploadError} 
+                   handleUploadSuccess={this.handleUploadSuccess} 
+                   handleSubmit={this.handleSubmit} 
+                   photo={this.state.photo} 
+                   photoUrl={this.state.photoUrl} 
+                   isUploading={this.state.isUploading} 
+                   isUploaded={this.state.isUploaded} 
+                />
               </Modal>
             </main>
           </Content>

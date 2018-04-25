@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import styled from 'styled-components';
 import { Spin, Button } from 'antd';
+import Aux from '../../hoc/Aux';
 
 const Img = styled.img `
   max-width: 600px;
@@ -14,90 +15,46 @@ const Img = styled.img `
 `;
 
 class Upload extends Component {
-  state = {
-    photo: '',
-    isUploading: false,
-    isUploaded: false,
-    photoUrl: '',
-    visible: ''
-  };
-
-  handleUploadSuccess = (filename) => {
-    this.setState({
-      photo: filename, 
-      isUploading: false,
-      isUploaded: true,
-      visible: true,
-    });
-    firebase.storage().ref('photos').child(filename).getDownloadURL()
-      .then(url => this.setState({
-        photoUrl: url
-      })
-    );
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      isUploading: false,
-      isUploaded: false,
-      visible: false
-    });
-    firebase.database().ref('photos').push(this.state.photoUrl);
-  };
-
-  handleUploadStart = () => {
-    this.setState({
-      isUploading: true, 
-      isUploaded: false, 
-    });
-  };
-
-  handleUploadError = (error) => {
-    this.setState({
-      isUploading: false,
-      isUploaded: false, 
-    });
-    console.error(error);
-  };
 
   render() {
-    let button = (
+    let uploadButton = (
       <Button type="button">
-        <label for="uploader">
+        <label htmlFor="uploader">
         <FileUploader
           hidden
           id="uploader"
           accept="image/*"
           randomizeFilename
           storageRef={firebase.storage().ref('photos')}
-          onUploadStart={this.handleUploadStart}
-          onUploadError={this.handleUploadError}
-          onUploadSuccess={this.handleUploadSuccess}
+          onUploadStart={this.props.handleUploadStart}
+          onUploadError={this.props.handleUploadError}
+          onUploadSuccess={this.props.handleUploadSuccess}
         />
           UPLOAD
         </label>
       </Button>
     );
 
-    if (this.state.isUploaded) {
-      button = <Button type="submit" >SUBMIT</Button>
+    let submitButton;
+    if (this.props.isUploaded) {
+      submitButton = <Button htmlType="submit" >SUBMIT</Button>
     };
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          {this.state.isUploading &&
+      <Aux>
+        <form onSubmit={this.props.handleSubmit}>
+          {this.props.isUploading &&
             <Spin />
           }
-          {this.state.photoUrl &&
-            <Img src={this.state.photoUrl} alt="img" />
+          {this.props.photoUrl &&
+            <Img src={this.props.photoUrl} alt="img" />
           }
           <div>
-            { button }
+            { uploadButton }
+            { submitButton }
           </div>
         </form>
-      </div>
+      </Aux>
     );
   }
 }
