@@ -1,2 +1,4 @@
 preview images without uploading onto fire storage
 spin masonry grid
+improve upload functional
+make photo details stateless

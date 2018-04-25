@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
 
-import UserPhotos from '../UserPhotos/UserPhotos';
+import UserPhotos from '../../components/UserPhotos/UserPhotos';
 
 import axios from '../../axios-photos';
 import * as actions from '../../store/actions/index';

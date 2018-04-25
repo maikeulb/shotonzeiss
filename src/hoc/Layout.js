@@ -8,7 +8,7 @@ import { Layout as AntLayout, Menu, Icon, Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
-import Upload from '../containers/Upload/Upload';
+import Upload from '../components/Upload/Upload';
 const { Header, Content, Footer, Sider } = AntLayout;
 
 const Trigger = styled.div`
