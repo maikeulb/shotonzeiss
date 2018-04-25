@@ -6,7 +6,7 @@ import Layout from './hoc/Layout';
 import Photos from './containers/Photos/Photos';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
-import Upload from './containers/Upload/Upload';
+import Upload from './components/Upload/Upload';
 import User from './containers/User/User';
 import './App.css';
 

@@ -5,7 +5,7 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 
 import UserPhotos from '../../components/UserPhotos/UserPhotos';
 
-import axios from '../../axios-photos';
+import axios from '../../axios';
 import * as actions from '../../store/actions/index';
 import styled from 'styled-components';
 import { Divider } from 'antd';
