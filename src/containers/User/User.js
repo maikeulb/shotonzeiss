@@ -16,7 +16,6 @@ const Header= styled.h1 `
 
 class User extends Component {
   componentDidMount() {
-    // this.props.onFetchUserProfile(this.props.match.params.id);
     this.props.onFetchUserPhotos(this.props.match.params.id);
   }
 
@@ -36,15 +35,13 @@ class User extends Component {
 
 const mapStateToProps = state => {
   return {
-    // profile: state.users.profile,
     photos: state.photos.photos,
-    loading: state.users.loading,
+    loading: state.photos.loading,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onFetchUserProfile: (id) => dispatch( actions.fetchUserProfile(id) ),
     onFetchUserPhotos: (id) => dispatch( actions.fetchUserPhotos(id) )
   };
 };

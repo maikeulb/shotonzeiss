@@ -16,8 +16,6 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/upload" component={Upload} />
-        <Route path="/users/:id" component={User} />
         <Route path="/" exact component={Photos} />
         <Redirect to="/" />
       </Switch>

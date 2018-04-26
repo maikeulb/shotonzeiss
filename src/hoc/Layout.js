@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
-import firebase from 'firebase';
 
 import Aux from './Aux';
 import { Layout as AntLayout, Menu, Icon, Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
-import axios from '../axios';
 import Upload from '../components/Upload/Upload';
 const { Header, Content, Footer, Sider } = AntLayout;
 

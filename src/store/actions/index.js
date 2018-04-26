@@ -10,9 +10,6 @@ export {
   fetchAllPhotos,
   fetchAllPhotosSuccess,
   fetchAllPhotosStart,
-  fetchSinglePhoto,
-  fetchSinglePhotoSuccess,
-  fetchSinglePhotoStart,
   fetchUserPhotos,
   fetchUserPhotosSuccess,
   fetchUserPhotosStart,
@@ -24,9 +21,3 @@ export {
   setAuthRedirectPath,
   verifyAuth,
 } from './auth';
-export {
-  fetchUserProfile,
-  fetchUserProfileSuccess,
-  fetchUserProfileStart,
-  fetchProfileFail
-} from './users';

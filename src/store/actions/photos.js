@@ -75,12 +75,6 @@ export const fetchAllPhotosStart = () => {
   };
 };
 
-export const fetchSinglePhotoStart = () => {
-  return {
-    type: actionTypes.FETCH_SINGLE_PHOTO_START
-  };
-};
-
 export const fetchUserPhotosStart = () => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_START
@@ -91,13 +85,6 @@ export const fetchAllPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_ALL_PHOTOS_SUCCESS,
     photos: photos// has username
-  };
-};
-
-export const fetchSinglePhotoSuccess = ( photos ) => {
-  return {
-    type: actionTypes.FETCH_SINGLE_PHOTO_SUCCESS,
-    photos: photos // has username
   };
 };
 
@@ -128,27 +115,6 @@ export const fetchAllPhotos = () => {
           } );
         }
         dispatch(fetchAllPhotosSuccess(fetchedPhotos));
-      } )
-    .catch( err => {
-      dispatch(fetchPhotosFail(err));
-    } );
-  };
-};
-
-export const fetchSinglePhoto = (photoId) => {
-  return dispatch => {
-    dispatch(fetchSinglePhotoStart());
-    const queryParams = `&equalTo="${photoId}"`;
-    axios.get( '/photos.json' + queryParams )
-      .then( res => {
-        const fetchedPhoto = [];
-        for ( let key in res.data ) {
-          fetchedPhoto.push( {
-              ...res.data[key],
-              id: key
-          } );
-        }
-        dispatch(fetchSinglePhotoSuccess(fetchedPhoto));
       } )
     .catch( err => {
       dispatch(fetchPhotosFail(err));
