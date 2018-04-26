@@ -3,7 +3,16 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';
+import { Avatar } from 'antd';
 
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 
 const Img = styled.img `
   width: 350px;
@@ -24,12 +33,18 @@ const ImgModal = styled.img `
 `;
 
 const Footer = styled.div `
-  paddingTop: 10px;
+  padding-top: 10px;
 `;
 
 const Li = styled.div `
   list-style-type: none;
   cursor: pointer;
+`;
+
+const Span = styled.span `
+  display: flex;
+  text-decoration: none;
+  justify-content: flex-end;
 `;
 
 class PhotoDetail extends Component {
@@ -56,7 +71,7 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    const { photoUrl, username, userId } = this.props.photo;
+    const { photoUrl, diplayName, photoURL, userId } = this.props.photo;
 
     return(
       <div>
@@ -74,9 +89,12 @@ class PhotoDetail extends Component {
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
             <Footer>
-              <Link onClick={ this.closeModal } to={`/users/${userId}`}>
-              <h3> { username } </h3>
-              </Link>
+              <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
+                <Span>
+                  <span style={{paddingRight:"10px", paddingTop:"5px"}}>{ diplayName } </span>
+                  <Avatar size="large" shape="square" src={photoURL} alt=""/>
+               </Span>
+              </StyledLink>
            </Footer>
           </Modal>
 

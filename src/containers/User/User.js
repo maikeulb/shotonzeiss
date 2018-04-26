@@ -8,8 +8,7 @@ import UserPhotos from '../../components/UserPhotos/UserPhotos';
 import axios from '../../axios';
 import * as actions from '../../store/actions/index';
 import styled from 'styled-components';
-import { Divider } from 'antd';
-import { Spin } from 'antd';
+import { Spin, Avatar, Divider } from 'antd';
 
 const Header= styled.h1 `
 `;
@@ -24,7 +23,7 @@ class User extends Component {
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
-          <Divider orientation="right"> <Header> { this.props.photos[0].username } </Header> </Divider>
+          <Divider orientation="right"> <h2>{ this.props.photos[0].diplayName } </h2> </Divider>
           <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
         </div>
       );

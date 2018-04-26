@@ -33,7 +33,7 @@ class Layout extends Component {
     isUploaded: false,
     visible: false,
     collapsed: true,
- };
+  };
 
   handleUploadSuccess = (filename) => {
     this.props.onUploadPhoto(filename, this.props.token);
@@ -48,7 +48,9 @@ class Layout extends Component {
     const photoData = {
      photoUrl: this.props.photoUrl,
      userId: this.props.user.uid,
-     username: this.props.user.email,
+     email: this.props.user.email,
+     diplayName: this.props.user.displayName,
+     photoURL: this.props.user.photoURL,
     }
     this.setState({
       isUploading: false,
@@ -80,6 +82,7 @@ class Layout extends Component {
   }
 
   showModal = () => {
+    console.log(this.props.user)
     this.setState({ 
       visible: true,
     });

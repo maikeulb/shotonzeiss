@@ -9,7 +9,6 @@ import Logout from './containers/Logout/Logout';
 import Upload from './components/Upload/Upload';
 import User from './containers/User/User';
 import './App.css';
-import './typography';
 
 
 class App extends Component {
