@@ -1,5 +1,6 @@
 export {
   uploadInit,
+  uploadPhoto,
   uploadPhotoStart,
   uploadPhotoSuccess,
   uploadPhotoFail,

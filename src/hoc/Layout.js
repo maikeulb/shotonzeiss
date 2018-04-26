@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../store/actions/index';
 import firebase from 'firebase';
 
 import Aux from './Aux';
@@ -8,6 +9,7 @@ import { Layout as AntLayout, Menu, Icon, Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
+import axios from '../axios';
 import Upload from '../components/Upload/Upload';
 const { Header, Content, Footer, Sider } = AntLayout;
 
@@ -35,7 +37,7 @@ class Layout extends Component {
     isUploaded: false,
     visible: false,
     collapsed: true,
-  };
+ };
 
   handleUploadSuccess = (filename) => {
     this.setState({
@@ -72,7 +74,7 @@ class Layout extends Component {
       isUploaded: false,
       visible: false,
     });
-    firebase.database().ref('photos').push(photoData);
+    this.props.onUploadPhoto(photoData, this.props.token);
   };
 
   handleUploadStart = () => {
@@ -184,8 +186,16 @@ class Layout extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.user !== null,
-    user: state.auth.user
+    user: state.auth.user,
+    token: state.auth.token,
+    loading: state.photos.loading,
   };
 };
 
-export default connect( mapStateToProps )( Layout );
+const mapDispatchToProps = dispatch => {
+  return {
+    onUploadPhoto: (photoData, token) => dispatch(actions.uploadPhoto(photoData, token))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
