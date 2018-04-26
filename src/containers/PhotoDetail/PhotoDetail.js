@@ -4,8 +4,8 @@ import { Modal } from 'antd';
 import './PhotoDetail.css';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
-
-
+import Moment from 'react-moment';
+import moment from 'moment';
 const StyledLink = styled(Link)`
     text-decoration: none;
 
@@ -44,7 +44,8 @@ const Li = styled.div `
 const Span = styled.span `
   display: flex;
   text-decoration: none;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 class PhotoDetail extends Component {
@@ -71,8 +72,7 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    const { photoUrl, diplayName, photoURL, userId } = this.props.photo;
-
+    const { photoUrl, dateCreated, displayName, avatarURL, userId } = this.props.photo;
     return(
       <div>
         <Li>
@@ -88,13 +88,20 @@ class PhotoDetail extends Component {
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
-            <Footer>
-              <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
+              <Footer>
                 <Span>
-                  <span style={{paddingRight:"10px", paddingTop:"5px"}}>{ diplayName } </span>
-                  <Avatar size="large" shape="square" src={photoURL} alt=""/>
-               </Span>
+                  <span style={{paddingLeft:"5px", paddingBottom:"4px"}}>
+                    <Moment fromNow> 
+                      { dateCreated }  
+                    </Moment>
+                  </span>
+                  <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
+                  <div>
+                    <span style={{paddingRight:"10px", paddingBottom:"2px"}}>{ displayName } </span>
+                    <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={avatarURL} alt=""/></span>
+                  </div>
               </StyledLink>
+               </Span>
            </Footer>
           </Modal>
 

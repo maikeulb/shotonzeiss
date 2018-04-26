@@ -19,10 +19,8 @@ Infrastructure
 
 TODO
 ----
-Improve upload functionality
 Add spinner to masonry grid
 Convert photo details into a stateless component
-Add anonymous login
 Seed users
-Add moment
 Add saga
+Add anonymous login

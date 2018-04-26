@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import logo from '../assets/logo.png';
 
 import Upload from '../components/Upload/Upload';
+import moment from 'moment';
 const { Header, Content, Footer, Sider } = AntLayout;
 
 const Trigger = styled.div`
@@ -49,8 +50,9 @@ class Layout extends Component {
      photoUrl: this.props.photoUrl,
      userId: this.props.user.uid,
      email: this.props.user.email,
-     diplayName: this.props.user.displayName,
-     photoURL: this.props.user.photoURL,
+     displayName: this.props.user.displayName,
+     avatarURL: this.props.user.photoURL,
+     dateCreated: moment()
     }
     this.setState({
       isUploading: false,

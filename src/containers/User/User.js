@@ -23,7 +23,7 @@ class User extends Component {
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
-          <Divider orientation="right"> <h2>{ this.props.photos[0].diplayName } </h2> </Divider>
+          <Divider orientation="right"> <h2>{ this.props.photos[0].displayName } </h2> </Divider>
           <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
         </div>
       );

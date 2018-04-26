@@ -84,14 +84,14 @@ export const fetchUserPhotosStart = () => {
 export const fetchAllPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_ALL_PHOTOS_SUCCESS,
-    photos: photos// has username
+    photos: photos
   };
 };
 
 export const fetchUserPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_SUCCESS,
-    photos: photos // has username
+    photos: photos
   };
 };
 
