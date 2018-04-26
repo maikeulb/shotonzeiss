@@ -16,17 +16,17 @@ const Header= styled.h1 `
 
 class User extends Component {
   componentDidMount() {
-    this.props.onFetchUserProfile(this.props.match.params.id);
+    // this.props.onFetchUserProfile(this.props.match.params.id);
     this.props.onFetchUserPhotos(this.props.match.params.id);
   }
 
   render() {
     let profile = <Spin />;
-    if ( !this.props.loading && this.props.profile[0]) {
+    if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
-          <Divider orientation="right"> <Header> { this.props.profile[0].username } </Header> </Divider>
-          <UserPhotos photos={ this.props.photos } userId={ this.props.profile[0].userId }/>
+          <Divider orientation="right"> <Header> { this.props.photos[0].username } </Header> </Divider>
+          <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
         </div>
       );
     }
@@ -36,7 +36,7 @@ class User extends Component {
 
 const mapStateToProps = state => {
   return {
-    profile: state.users.profile,
+    // profile: state.users.profile,
     photos: state.photos.photos,
     loading: state.users.loading,
   };
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchUserProfile: (id) => dispatch( actions.fetchUserProfile(id) ),
+    // onFetchUserProfile: (id) => dispatch( actions.fetchUserProfile(id) ),
     onFetchUserPhotos: (id) => dispatch( actions.fetchUserPhotos(id) )
   };
 };
