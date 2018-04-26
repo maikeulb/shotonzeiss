@@ -43,6 +43,12 @@ class PhotoDetail extends Component {
     });
   }
 
+  closeModal = () => {
+    this.setState({ 
+      visible: false,
+    });
+  }
+
   handleCancel = () => {
     this.setState({ 
       visible: false 
@@ -68,7 +74,7 @@ class PhotoDetail extends Component {
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
             <Footer>
-              <Link to={`/users/${userId}`}>
+              <Link onClick={ this.closeModal } to={`/users/${userId}`}>
               <h3> { username } </h3>
               </Link>
            </Footer>

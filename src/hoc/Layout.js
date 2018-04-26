@@ -43,13 +43,6 @@ class Layout extends Component {
       isUploading: false,
       isUploaded: true,
     });
-
-    // firebase.storage().ref('photos').child(filename).getDownloadURL()
-    //   .then(url => this.setState({
-    //     photoUrl: url
-    //   })
-    // );
-
   };
 
   handleSubmit = (e) => {
