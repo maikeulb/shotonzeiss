@@ -23,4 +23,3 @@ Add spinner to masonry grid
 Convert photo details into a stateless component
 Seed users
 Add saga
-Add anonymous login

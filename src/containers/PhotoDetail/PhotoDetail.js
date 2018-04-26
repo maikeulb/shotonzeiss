@@ -5,7 +5,7 @@ import './PhotoDetail.css';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Moment from 'react-moment';
-import moment from 'moment';
+
 const StyledLink = styled(Link)`
     text-decoration: none;
 

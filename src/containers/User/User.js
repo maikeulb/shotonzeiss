@@ -8,10 +8,7 @@ import UserPhotos from '../../components/UserPhotos/UserPhotos';
 import axios from '../../axios';
 import * as actions from '../../store/actions/index';
 import styled from 'styled-components';
-import { Spin, Avatar, Divider } from 'antd';
-
-const Header= styled.h1 `
-`;
+import { Spin, Divider } from 'antd';
 
 class User extends Component {
   componentDidMount() {
