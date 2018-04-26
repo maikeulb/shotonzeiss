@@ -13,7 +13,6 @@ export const submitPhotoSuccess = ( id, photoData ) => {
     type: actionTypes.SUBMIT_PHOTO_SUCCESS,
     photoId: id,
     photoData: photoData,
-    photo: ''
   };
 };
 

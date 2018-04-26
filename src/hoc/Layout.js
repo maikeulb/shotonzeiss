@@ -49,7 +49,6 @@ class Layout extends Component {
     const photoData = {
      photoUrl: this.props.photoUrl,
      userId: this.props.user.uid,
-     email: this.props.user.email,
      displayName: this.props.user.displayName,
      avatarURL: this.props.user.photoURL,
      dateCreated: moment()
@@ -84,7 +83,6 @@ class Layout extends Component {
   }
 
   showModal = () => {
-    console.log(this.props.user)
     this.setState({ 
       visible: true,
     });
@@ -151,7 +149,7 @@ class Layout extends Component {
                    handleUploadError={this.handleUploadError} 
                    handleUploadSuccess={this.handleUploadSuccess} 
                    handleSubmit={this.handleSubmit} 
-                   photo={this.state.photo} 
+                   photo={this.props.photo} 
                    photoUrl={this.props.photoUrl} 
                    isUploading={this.state.isUploading} 
                    isUploaded={this.state.isUploaded} 
@@ -175,6 +173,7 @@ const mapStateToProps = state => {
     user: state.auth.user,
     token: state.auth.token,
     loading: state.photos.loading,
+    photo: state.photos.photo,
     photoUrl: state.photos.photoUrl,
   };
 };

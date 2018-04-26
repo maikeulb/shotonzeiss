@@ -4,8 +4,8 @@ import {updateObject} from '../utility'
 const initialState = {
   photos: [],
   photo: '',
+  photoUrl: '',
   loading: false,
-  photoUrl: ''
 };
 
 const submitPhotoStart = ( state, action ) => {
@@ -18,7 +18,9 @@ const submitPhotoSuccess = ( state, action ) => {
   const newPhoto = updateObject( action.photoData, { id: action.photoId } );
   return updateObject( state, {
     loading: false,
-    photos: state.photos.concat( newPhoto )
+    photos: state.photos.concat( newPhoto ),
+    photo: '',
+    photoUrl: ''
   } );
 };
 

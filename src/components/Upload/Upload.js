@@ -38,18 +38,28 @@ const upload = ( props ) => {
     submitButton = <Button htmlType="submit" >SUBMIT</Button>
   };
 
+  let spin;
+  if (props.isUploading) {
+    spin =  <Spin />
+  };
+
+  let photoUrl;
+  if (props.photoUrl) {
+    photoUrl = <Img src={props.photoUrl} alt="img" />
+  };
+
   return (
     <Aux>
       <form onSubmit={props.handleSubmit}>
-        {props.isUploading &&
-          <Spin />
-        }
-        {props.photoUrl &&
-          <Img src={props.photoUrl} alt="img" />
-        }
+        <div>
+        <div style={{margin: 'auto', textAlign: 'center'}}>
+          { spin }
+          { photoUrl }
+        </div>
         <div>
           { uploadButton }
           { submitButton }
+        </div>
         </div>
       </form>
     </Aux>
