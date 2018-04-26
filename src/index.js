@@ -8,13 +8,15 @@ import thunk from 'redux-thunk';
 import * as actions from './store/actions/index';
 import photosReducer from './store/reducers/photos';
 import authReducer from './store/reducers/auth';
+import usersReducer from './store/reducers/users';
 
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
 const rootReducer = combineReducers({
   photos: photosReducer,
-  auth: authReducer
+  auth: authReducer,
+  users: usersReducer
 });
 
 const store = createStore(

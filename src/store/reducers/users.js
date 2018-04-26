@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import {updateObject} from '../utility'
 
 const initialState = {
-  user: [],
+  profile: [],
   loading: false,
 };
 
@@ -13,9 +13,9 @@ const fetchUserProfileStart = ( state, action ) => {
   } );
 };
 
-const fetchUserProfilesSuccess = ( state, action ) => {
+const fetchUserProfileSuccess = ( state, action ) => {
   return updateObject( state, {
-    photos: action.photos,
+    profile: action.profile,
     loading: false
   } );
 };

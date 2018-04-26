@@ -52,7 +52,7 @@ export const fetchSinglePhotoStart = () => {
   };
 };
 
-export const fetchUserPhotoStart = () => {
+export const fetchUserPhotosStart = () => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_START
   };
@@ -72,7 +72,7 @@ export const fetchSinglePhotoSuccess = ( photos ) => {
   };
 };
 
-export const fetchUserPhotoSuccess = ( photos ) => {
+export const fetchUserPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_SUCCESS,
     photos: photos // has username
@@ -109,7 +109,7 @@ export const fetchAllPhotos = () => {
 export const fetchSinglePhoto = (photoId) => {
   return dispatch => {
     dispatch(fetchSinglePhotoStart());
-    const queryParams = '?&equalTo="' + photoId + '"';
+    const queryParams = '&equalTo="' + photoId + '"';
     axios.get( '/photos.json' + queryParams )
       .then( res => {
         const fetchedPhoto = [];
@@ -127,10 +127,10 @@ export const fetchSinglePhoto = (photoId) => {
   };
 };
 
-export const fetchUserPhoto = (userId) => {
+export const fetchUserPhotos = (userId) => {
   return dispatch => {
-    dispatch(fetchUserPhotoStart());
-    const queryParams = '?&orderBy="userId"&equalTo="' + userId + '"';
+    dispatch(fetchUserPhotosStart());
+    const queryParams = '?orderBy="userId"&equalTo="' + userId + '"';
     axios.get( '/photos.json' + queryParams )
       .then( res => {
         const fetchedPhotos = [];
@@ -140,7 +140,7 @@ export const fetchUserPhoto = (userId) => {
               id: key
           } );
         }
-        dispatch(fetchUserPhotoSuccess(fetchedPhotos));
+        dispatch(fetchUserPhotosSuccess(fetchedPhotos));
       } )
     .catch( err => {
       dispatch(fetchPhotosFail(err));

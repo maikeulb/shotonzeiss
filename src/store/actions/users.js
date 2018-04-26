@@ -21,7 +21,7 @@ export const fetchProfileFail = ( error ) => {
   };
 };
 
-export const fetchUserProfile = (userId) => {
+export const fetchUserProfile = ( userId ) => {
   return dispatch => {
     dispatch(fetchUserProfileStart());
     const queryParams = '?&orderBy="userId"&equalTo="' + userId + '"';
