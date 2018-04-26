@@ -24,8 +24,6 @@ class User extends Component {
     let profile = <Spin />;
     // let { userId, username } = this.props.profile;
     if ( !this.props.loading && this.props.profile[0]) {
-      console.log(this.props.profile)
-      console.log(this.props.profile[0])
       profile = (
         <div>
           <Divider orientation="right"> <Header> { this.props.profile[0].username } </Header> </Divider>

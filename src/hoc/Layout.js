@@ -105,7 +105,7 @@ class Layout extends Component {
 
   render () {
     const profile = this.props.isAuthenticated ? 
-              (<Menu.Item key="1"><Link to='/users/1'><span>Profile</span></Link></Menu.Item>):
+              (<Menu.Item key="1"><Link to={`/users/${this.props.user.uid}`}><span>Profile</span></Link></Menu.Item>):
               ("")
     const upload = this.props.isAuthenticated ? 
               (<Menu.Item key="2"><span onClick={ this.showModal }>Upload</span></Menu.Item>):
@@ -113,7 +113,6 @@ class Layout extends Component {
     const auth = this.props.isAuthenticated ? 
               (<Link to='/logout'><span>Logout</span></Link>):
               (<Link to='/login'><span>Login</span></Link>)
-
     return (
       <Aux>
         <AntLayout>
@@ -178,9 +177,10 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.auth.user !== null
-    };
+  return {
+    isAuthenticated: state.auth.user !== null,
+    user: state.auth.user
+  };
 };
 
 export default connect( mapStateToProps )( Layout );
