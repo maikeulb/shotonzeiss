@@ -30,7 +30,7 @@ export const uploadPhotoFail = () => {
 export const uploadPhoto = ( photoData, token ) => {
   return dispatch => {
     dispatch( uploadPhotoStart() );
-    axios.post( '/photos.json?auth=' + token, photoData )
+    axios.post( `/photos.json?auth=${token}`, photoData )
       .then( response => {
         dispatch( uploadPhotoSuccess( response.data.name, photoData ) );
       } )
@@ -109,7 +109,7 @@ export const fetchAllPhotos = () => {
 export const fetchSinglePhoto = (photoId) => {
   return dispatch => {
     dispatch(fetchSinglePhotoStart());
-    const queryParams = '&equalTo="' + photoId + '"';
+    const queryParams = `&equalTo="${photoId}"`;
     axios.get( '/photos.json' + queryParams )
       .then( res => {
         const fetchedPhoto = [];
@@ -130,8 +130,8 @@ export const fetchSinglePhoto = (photoId) => {
 export const fetchUserPhotos = (userId) => {
   return dispatch => {
     dispatch(fetchUserPhotosStart());
-    const queryParams = '?orderBy="userId"&equalTo="' + userId + '"';
-    axios.get( '/photos.json' + queryParams )
+    const queryParams = `?orderBy="userId"&equalTo="${userId}"`;
+    axios.get( `/photos.json${ queryParams }`)
       .then( res => {
         const fetchedPhotos = [];
         for ( let key in res.data ) {

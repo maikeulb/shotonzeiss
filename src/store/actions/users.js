@@ -24,7 +24,7 @@ export const fetchProfileFail = ( error ) => {
 export const fetchUserProfile = ( userId ) => {
   return dispatch => {
     dispatch(fetchUserProfileStart());
-    const queryParams = '?&orderBy="userId"&equalTo="' + userId + '"';
+    const queryParams = `?&orderBy="userId"&equalTo="${userId}"`;
     axios.get( '/users.json' + queryParams )
       .then( res => {
         const fetchedProfile = [];

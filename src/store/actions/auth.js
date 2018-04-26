@@ -52,9 +52,6 @@ export const startLogin = () => {
   return dispatch => {
     firebase.auth().signInWithPopup(googleProvider)
       .then(response => {
-         console.log(response)
-         console.log(response.user)
-         console.log(response.credential.accessToken)
          dispatch(authLogin(response.user, response.credential.accessToken));
       })
       .catch(err => {
