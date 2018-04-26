@@ -17,9 +17,18 @@ Infrastructure
 * Firebase Authentication
 * Firebase Hosting
 
+Screenshots
+---
+### Home 
+![home](/screenshots/home.png?raw=true "Home")
+### Photo 
+![photo](/screenshots/photo.png?raw=true "Orders")
+### Upload 
+![upload](/screenshots/upload.png?raw=true "Upload")
+### Profile 
+![profile](/screenshots/profile.png?raw=true "Profile")
+
 TODO
 ----
-Add spinner to masonry grid
-Convert photo details into a stateless component
-Seed users
+Convert photo details into a stateless component <br>
 Add saga
