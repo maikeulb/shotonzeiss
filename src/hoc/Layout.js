@@ -60,6 +60,11 @@ class Layout extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const photoData = {
+     photoUrl: this.state.photoUrl,
+     userId: this.props.user.uid,
+     username: this.props.user.email,
+    }
     this.setState({
       photo: '', 
       photoUrl: '', 
@@ -67,7 +72,7 @@ class Layout extends Component {
       isUploaded: false,
       visible: false,
     });
-    firebase.database().ref('photos').push(this.state.photoUrl);
+    firebase.database().ref('photos').push(photoData);
   };
 
   handleUploadStart = () => {
