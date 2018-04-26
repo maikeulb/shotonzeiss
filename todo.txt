@@ -1,7 +1,0 @@
-preview images without uploading onto fire storage
-spin masonry grid
-improve upload functional
-make photo details stateless
-remove dependency on react firebase uploader 
-protect database (pass token to firebase uploader and/or learn ajax w/ axios)
-
