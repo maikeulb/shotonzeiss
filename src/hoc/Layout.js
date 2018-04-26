@@ -31,8 +31,6 @@ const Logo = styled.div`
 
 class Layout extends Component {
   state = {
-    photo: '',
-    photoUrl: '',
     isUploading: false,
     isUploaded: false,
     visible: false,
@@ -40,41 +38,33 @@ class Layout extends Component {
  };
 
   handleUploadSuccess = (filename) => {
+    this.props.onUploadPhoto(filename, this.props.token);
     this.setState({
-      photo: filename, 
       isUploading: false,
       isUploaded: true,
     });
-    firebase.storage().ref('photos').child(filename).getDownloadURL()
-      .then(url => this.setState({
-        photoUrl: url
-      })
-    );
-  };
 
-  // handleChangePhoto = (e) => {
-  //   console.log('im called')
-  //   const photo = e.target.files[0];
-  //   if (photo) {
-  //     this.setState({photo});
-  //   }
-  // };
+    // firebase.storage().ref('photos').child(filename).getDownloadURL()
+    //   .then(url => this.setState({
+    //     photoUrl: url
+    //   })
+    // );
+
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const photoData = {
-     photoUrl: this.state.photoUrl,
+     photoUrl: this.props.photoUrl,
      userId: this.props.user.uid,
      username: this.props.user.email,
     }
     this.setState({
-      photo: '', 
-      photoUrl: '', 
       isUploading: false,
       isUploaded: false,
       visible: false,
     });
-    this.props.onUploadPhoto(photoData, this.props.token);
+    this.props.onSubmitPhoto(photoData, this.props.token);
   };
 
   handleUploadStart = () => {
@@ -166,7 +156,7 @@ class Layout extends Component {
                    handleUploadSuccess={this.handleUploadSuccess} 
                    handleSubmit={this.handleSubmit} 
                    photo={this.state.photo} 
-                   photoUrl={this.state.photoUrl} 
+                   photoUrl={this.props.photoUrl} 
                    isUploading={this.state.isUploading} 
                    isUploaded={this.state.isUploaded} 
                 />
@@ -189,12 +179,14 @@ const mapStateToProps = state => {
     user: state.auth.user,
     token: state.auth.token,
     loading: state.photos.loading,
+    photoUrl: state.photos.photoUrl,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUploadPhoto: (photoData, token) => dispatch(actions.uploadPhoto(photoData, token))
+    onSubmitPhoto: (photoData, token) => dispatch(actions.submitPhoto(photoData, token)),
+    onUploadPhoto: (filename, token) => dispatch(actions.uploadPhoto(filename, token))
   };
 };
 

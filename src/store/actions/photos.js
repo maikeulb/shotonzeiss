@@ -1,9 +1,25 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
+import firebase from 'firebase';
 
-export const uploadInit = () => {
+export const submitPhotoStart = () => {
   return {
-    type: actionTypes.UPLOAD_PHOTO_INIT
+    type: actionTypes.SUBMIT_PHOTO_START
+  };
+};
+
+export const submitPhotoSuccess = ( id, photoData ) => {
+  return {
+    type: actionTypes.SUBMIT_PHOTO_SUCCESS,
+    photoId: id,
+    photoData: photoData,
+    photo: ''
+  };
+};
+
+export const submitPhotoFail = () => {
+  return {
+    type: actionTypes.SUBMIT_PHOTO_FAIL
   };
 };
 
@@ -13,11 +29,11 @@ export const uploadPhotoStart = () => {
   };
 };
 
-export const uploadPhotoSuccess = ( id, photoData ) => {
+export const uploadPhotoSuccess = ( url, filename ) => {
   return {
     type: actionTypes.UPLOAD_PHOTO_SUCCESS,
-    photoId: id,
-    photoData: photoData
+    photoUrl: url,
+    photo: filename, 
   };
 };
 
@@ -27,13 +43,26 @@ export const uploadPhotoFail = () => {
   };
 };
 
-export const uploadPhoto = ( photoData, token ) => {
+export const submitPhoto = ( photoData, token ) => {
   return dispatch => {
-    dispatch( uploadPhotoStart() );
+    dispatch( submitPhotoStart() );
     axios.post( `/photos.json?auth=${token}`, photoData )
       .then( response => {
-        dispatch( uploadPhotoSuccess( response.data.name, photoData ) );
+        dispatch( submitPhotoSuccess( response.data.name, photoData ) );
       } )
+      .catch( error => {
+        dispatch( submitPhotoFail( error ) );
+      } );
+  };
+};
+
+export const uploadPhoto = ( filename, token ) => {
+  return dispatch => {
+    dispatch( uploadPhotoStart() );
+    firebase.storage().ref('photos').child(filename).getDownloadURL()
+      .then(url => {
+        dispatch (uploadPhotoSuccess ( url, filename ));  
+      })
       .catch( error => {
         dispatch( uploadPhotoFail( error ) );
       } );

@@ -3,12 +3,29 @@ import {updateObject} from '../utility'
 
 const initialState = {
   photos: [],
+  photo: '',
   loading: false,
+  photoUrl: ''
 };
 
+const submitPhotoStart = ( state, action ) => {
+  return updateObject( state, 
+    { loading: true } 
+  );
+};
 
-const uploadInit = ( state, action ) => {
-  return updateObject( state );
+const submitPhotoSuccess = ( state, action ) => {
+  const newPhoto = updateObject( action.photoData, { id: action.photoId } );
+  return updateObject( state, {
+    loading: false,
+    photos: state.photos.concat( newPhoto )
+  } );
+};
+
+const submitPhotoFail = ( state, action ) => {
+  return updateObject( state, { 
+    loading: false 
+  } );
 };
 
 const uploadPhotoStart = ( state, action ) => {
@@ -18,11 +35,11 @@ const uploadPhotoStart = ( state, action ) => {
 };
 
 const uploadPhotoSuccess = ( state, action ) => {
-  const newPhoto = updateObject( action.photoData, { id: action.photoId } );
   return updateObject( state, {
     loading: false,
-    photos: state.photos.concat( newPhoto )
-  } );
+    photoUrl: action.photoUrl,
+    photo: action.photo,
+  });
 };
 
 const uploadPhotoFail = ( state, action ) => {
@@ -78,7 +95,9 @@ const fetchPhotosFail = ( state, action ) => {
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
-    case actionTypes.UPLOAD_PHOTO_INIT: return uploadInit(state, action);
+    case actionTypes.SUBMIT_PHOTO_START: return submitPhotoStart(state, action);
+    case actionTypes.SUBMIT_PHOTO_SUCCESS: return submitPhotoSuccess(state, action);
+    case actionTypes.SUBMIT_PHOTO_FAIL: return submitPhotoFail(state, action);
     case actionTypes.UPLOAD_PHOTO_START: return uploadPhotoStart(state, action);
     case actionTypes.UPLOAD_PHOTO_SUCCESS: return uploadPhotoSuccess(state, action);
     case actionTypes.UPLOAD_PHOTO_FAIL: return uploadPhotoFail(state, action);

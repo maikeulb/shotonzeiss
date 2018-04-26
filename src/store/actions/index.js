@@ -1,5 +1,8 @@
 export {
-  uploadInit,
+  submitPhoto,
+  submitPhotoStart,
+  submitPhotoSuccess,
+  submitPhotoFail,
   uploadPhoto,
   uploadPhotoStart,
   uploadPhotoSuccess,
