@@ -7,7 +7,7 @@ import { Icon } from 'antd';
 class Follow extends Component {
   handleClick = (e) => {
     e.preventDefault();
-    if (!this.props.isFollowing) {
+    if (this.props.isFollowing) {
       this.props.onUnfollowUser(this.props.followerId, this.props.followeeId);
     } else {
       this.props.onFollowUser(this.props.followerId, this.props.followeeId);

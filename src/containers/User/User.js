@@ -11,18 +11,34 @@ import './User.css';
 const TabPane = Tabs.TabPane
 
 class User extends Component {
+  state = {
+    isFollowing: this.props.followings.includes(this.props.match.params.id)
+  };
+
+
   componentDidMount() {
     this.props.onFetchUserPhotos(this.props.match.params.id);
     this.props.onFetchFriendsPhotos(this.props.match.params.id);
-    this.props.onFetchFollowings(this.props.match.params.id);
+    this.props.onFetchFollowings(this.props.auth.uid);
   }
 
-  render() {
-    const isFollowing = this.props.followings.includes(this.props.auth.uid)
+   
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log('user')
+  //   console.log(nextProps)
+  //   console.log(prevState)
+  //   return null;
+  //   }
 
+
+  render() {
+    console.log(this.props.followings)
+    console.log(this.props.match.params.id)
+    console.log(this.state.isFollowing)
+    console.log(this.props.followings.includes(this.props.match.params.id))
     let follow;
-    if ( this.props.user.uid !== this.props.photos[0].userId) {
-      follow = <Follow following = { isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
+    if ( this.props.auth.uid !== this.props.match.params.id) {
+      follow = <Follow following = { this.state.isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
     }
 
     let friendPane;

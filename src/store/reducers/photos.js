@@ -18,6 +18,9 @@ const submitPhotoStart = ( state, action ) => {
 
 const submitPhotoSuccess = ( state, action ) => {
   const newPhoto = updateObject( action.photoData, { id: action.photoId } );
+  console.log(newPhoto)
+  console.log(state.photos)
+  console.log(updateObject( state, { photos: state.photos.concat(newPhoto)}))
   return updateObject( state, {
     loading: false,
     photos: state.photos.concat( newPhoto ),
