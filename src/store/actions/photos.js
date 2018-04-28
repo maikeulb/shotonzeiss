@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios';
 import firebase from 'firebase';
 
 export const submitPhotoStart = () => {
@@ -45,9 +44,9 @@ export const uploadPhotoFail = () => {
 export const submitPhoto = ( photoData, token ) => {
   return dispatch => {
     dispatch( submitPhotoStart() );
-    axios.post( `/photos.json?auth=${token}`, photoData )
-      .then( response => {
-        dispatch( submitPhotoSuccess( response.data.name, photoData ) );
+    firebase.database().ref('photos').push({...photoData})
+      .then( ref => {
+        dispatch( submitPhotoSuccess( ref.key, photoData ) );
       } )
       .catch( error => {
         dispatch( submitPhotoFail( error ) );
@@ -104,38 +103,41 @@ export const fetchPhotosFail = ( error ) => {
 export const fetchAllPhotos = () => {
   return dispatch => {
     dispatch(fetchAllPhotosStart());
-    axios.get( '/photos.json')
-      .then( res => {
+    firebase.database().ref('photos')
+      .once('value')
+      .then((snapshot) => {
         const fetchedPhotos = [];
-        for ( let key in res.data ) {
-          fetchedPhotos.push( {
-              ...res.data[key],
-              id: key
-          } );
-        }
+        snapshot.forEach((photo) => {
+          fetchedPhotos.push({
+            ...photo.val(),
+            id:photo.key,
+          }) 
+        })
         dispatch(fetchAllPhotosSuccess(fetchedPhotos));
-      } )
+      })
     .catch( err => {
       dispatch(fetchPhotosFail(err));
-    } );
+    });
   };
 };
 
 export const fetchUserPhotos = (userId) => {
   return dispatch => {
     dispatch(fetchUserPhotosStart());
-    const queryParams = `?orderBy="userId"&equalTo="${userId}"`;
-    axios.get( `/photos.json${ queryParams }`)
-      .then( res => {
+    firebase.database().ref('photos')
+      .orderByChild('userId')
+      .equalTo(userId)
+      .once('value')
+      .then((snapshot) => {
         const fetchedPhotos = [];
-        for ( let key in res.data ) {
-          fetchedPhotos.push( {
-              ...res.data[key],
-              id: key
-          } );
-        }
-        dispatch(fetchUserPhotosSuccess(fetchedPhotos));
-      } )
+        snapshot.forEach((photo) => {
+          fetchedPhotos.push({
+            ...photo.val(),
+            id:photo.key,
+          }) 
+        })
+        dispatch(fetchAllPhotosSuccess(fetchedPhotos));
+      })
     .catch( err => {
       dispatch(fetchPhotosFail(err));
     } );

@@ -50,7 +50,7 @@ class Layout extends Component {
      userId: this.props.user.uid,
      displayName: this.props.user.displayName,
      avatarURL: this.props.user.photoURL,
-     dateCreated: moment()
+     dateCreated: moment().toISOString()
     }
     this.setState({
       isUploading: false,

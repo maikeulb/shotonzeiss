@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
-import withErrorHandler from '../../hoc/withErrorHandler';
-import axios from '../../axios';
-
 import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
 import { Spin } from 'antd';
@@ -100,4 +97,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( Photos, axios ) );
+export default connect( mapStateToProps, mapDispatchToProps )( Photos  );

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import withErrorHandler from '../../hoc/withErrorHandler';
-
 import UserPhotos from '../../components/UserPhotos/UserPhotos';
 import Follow from '../../components/Follow/Follow';
 
-import axios from '../../axios';
 import * as actions from '../../store/actions/index';
-import { Spin, Divider, Tabs, Icon } from 'antd';
+import { Spin, Divider, Tabs } from 'antd';
 import './User.css';
 
 const TabPane = Tabs.TabPane
@@ -59,4 +56,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( withErrorHandler( User, axios ) );
+export default connect( mapStateToProps, mapDispatchToProps )( User );
