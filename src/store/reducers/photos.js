@@ -3,6 +3,7 @@ import {updateObject} from '../utility'
 
 const initialState = {
   photos: [],
+  friendsPhotos: [],
   photo: '',
   photoUrl: '',
   loading: false,
@@ -84,7 +85,7 @@ const fetchUserPhotosSuccess = ( state, action ) => {
 
 const fetchFriendsPhotosSuccess = ( state, action ) => {
   return updateObject( state, {
-    photos: action.photos,
+    friendsPhotos: action.friendsPhotos,
     loading: false
   } );
 };

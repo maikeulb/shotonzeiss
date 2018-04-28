@@ -102,7 +102,7 @@ export const fetchUserPhotosSuccess = ( photos ) => {
 export const fetchFriendsPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_FRIENDS_PHOTOS_SUCCESS,
-    photos: photos
+    friendsPhotos: photos
   };
 };
 
@@ -157,60 +157,107 @@ export const fetchUserPhotos = (userId) => {
   };
 };
 
-function forEachPromise(items, fn) {
-    return items.reduce(function (promise, item) {
-        return promise.then(function () {
-            return fn(item);
-        });
-    }, Promise.resolve());
-}
-
-function logItem(item) {
-    return new Promise((resolve, reject) => {
-        process.nextTick(() => {
-            console.log(item);
-            resolve();
-        })
-    });
-}
 
 export const fetchFriendsPhotos = (userId) => {
+  console.log('im called')
   return dispatch => {
     dispatch(fetchFriendsPhotosStart());
-
-    let friendlst = [];
-    let fetchedPhotos = [];
-    firebase.database().ref('followings')
+    firebase.database().ref('feeds')
       .child(userId)
+      .child('photos')
       .once('value')
       .then((snapshot) => {
-        snapshot.forEach((friend) => {
-          friendlst.push({
-            ...friend.val(),
+        const fetchedPhotos = [];
+        snapshot.forEach((photo) => {
+          fetchedPhotos.push({
+            ...photo.val(),
+            id:photo.key,
           }) 
-        })
-      })
-      .then (() => {
-        ["1", "2"].forEach((uid) => {
-          firebase.database().ref('photos')
-            .orderByChild('userId')
-            .equalTo(uid)
-            .once('value')
-            .then((snapshot) => {
-              snapshot.forEach((photo) => {
-                console.log(photo)
-                console.log(uid)
-                fetchedPhotos.push({
-                  ...photo.val(),
-                  id:photo.key,
-                }) 
-              })
-            })
-          .catch( err => {
-            dispatch(fetchPhotosFail(err));
-          });
         })
         dispatch(fetchFriendsPhotosSuccess(fetchedPhotos));
       })
+    .catch( err => {
+      dispatch(fetchPhotosFail(err));
+    } );
   };
 };
+
+
+// export const fetchFriendsPhotos = (userId) => {
+//   return dispatch => {
+//     dispatch(fetchFriendsPhotosStart());
+//     let friendlst = [];
+//     let fetchedPhotos = [];
+//     firebase.database().ref('followings')
+//       .child(userId)
+//       .once('value')
+//       .then((snapshot) => {
+//         snapshot.forEach((friend) => {
+//           friendlst.push({
+//             ...friend.val(),
+//           }) 
+//         })
+//       })
+//       .then (() => {
+//         ["1", "2"].forEach((uid) => {
+//           firebase.database().ref('photos')
+//             .orderByChild('userId')
+//             .equalTo(uid)
+//             .once('value')
+//             .then((snapshot) => {
+//               snapshot.forEach((photo) => {
+//                 console.log(photo)
+//                 console.log(uid)
+//                 fetchedPhotos.push({
+//                   ...photo.val(),
+//                   id:photo.key,
+//                 }) 
+//               })
+//             })
+//           .catch( err => {
+//             dispatch(fetchPhotosFail(err));
+//           });
+//         })
+//         dispatch(fetchFriendsPhotosSuccess(fetchedPhotos));
+//       })
+//   };
+// };
+// export const fetchFriendsPhotos = (userId) => {
+//   return dispatch => {
+//     dispatch(fetchFriendsPhotosStart());
+//     let friendlst = [];
+//     let fetchedPhotos = [];
+//     firebase.database().ref('followings')
+//       .child(userId)
+//       .once('value')
+//       .then((snapshot) => {
+//         snapshot.forEach((friend) => {
+//           friendlst.push({
+//             ...friend.val(),
+//           }) 
+//         })
+//       })
+//       .then (() => {
+//         ["1", "2"].forEach((uid) => {
+//           firebase.database().ref('photos')
+//             .orderByChild('userId')
+//             .equalTo(uid)
+//             .once('value')
+//             .then((snapshot) => {
+//               snapshot.forEach((photo) => {
+//                 console.log(photo)
+//                 console.log(uid)
+//                 fetchedPhotos.push({
+//                   ...photo.val(),
+//                   id:photo.key,
+//                 }) 
+//               })
+//             })
+//           .catch( err => {
+//             dispatch(fetchPhotosFail(err));
+//           });
+//         })
+//         dispatch(fetchFriendsPhotosSuccess(fetchedPhotos));
+//       })
+//   };
+// };
