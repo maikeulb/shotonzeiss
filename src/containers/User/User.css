@@ -1,0 +1,13 @@
+.ant-tabs-vertical.ant-tabs-right > .ant-tabs-content {
+  padding-right: 0px !important;
+}
+
+.ant-tabs-vertical > .ant-tabs-bar .ant-tabs-ink-bar {
+  width: 0 !important;
+}
+
+.ant-tabs-bar {
+    border-bottom: 0px solid #e8e8e8 !important;
+    margin: 0 0 16px 0 !important;
+    transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}

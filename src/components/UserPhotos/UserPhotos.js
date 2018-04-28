@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
-  margin-left: 60px;
-  margin-right: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
 
   @media screen and (max-width: 700px){
     margin-left: 0;
