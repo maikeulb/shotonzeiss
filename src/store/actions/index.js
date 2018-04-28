@@ -13,6 +13,9 @@ export {
   fetchUserPhotos,
   fetchUserPhotosSuccess,
   fetchUserPhotosStart,
+  fetchFriendsPhotos,
+  fetchFriendsPhotosSuccess,
+  fetchFriendsPhotosStart,
   fetchPhotosFail
 } from './photos';
 export {

@@ -13,6 +13,7 @@ const TabPane = Tabs.TabPane
 class User extends Component {
   componentDidMount() {
     this.props.onFetchUserPhotos(this.props.match.params.id);
+    this.props.onFetchFriendsPhotos(this.props.match.params.id);
   }
 
   render() {
@@ -22,7 +23,6 @@ class User extends Component {
     if ( this.props.user.uid !== this.props.photos[0].userId)
       follow = <Follow />
 
-    console.log(this.props.user)
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
@@ -52,7 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchUserPhotos: (id) => dispatch( actions.fetchUserPhotos(id) )
+    onFetchUserPhotos: (id) => dispatch( actions.fetchUserPhotos(id) ),
+    onFetchFriendsPhotos: (id) => dispatch( actions.fetchFriendsPhotos(id) )
   };
 };
 

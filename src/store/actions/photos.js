@@ -79,6 +79,12 @@ export const fetchUserPhotosStart = () => {
   };
 };
 
+export const fetchFriendsPhotosStart = () => {
+  return {
+    type: actionTypes.FETCH_FRIENDS_PHOTOS_START
+  };
+};
+
 export const fetchAllPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_ALL_PHOTOS_SUCCESS,
@@ -89,6 +95,13 @@ export const fetchAllPhotosSuccess = ( photos ) => {
 export const fetchUserPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_SUCCESS,
+    photos: photos
+  };
+};
+
+export const fetchFriendsPhotosSuccess = ( photos ) => {
+  return {
+    type: actionTypes.FETCH_FRIENDS_PHOTOS_SUCCESS,
     photos: photos
   };
 };
@@ -136,10 +149,49 @@ export const fetchUserPhotos = (userId) => {
             id:photo.key,
           }) 
         })
-        dispatch(fetchAllPhotosSuccess(fetchedPhotos));
+        dispatch(fetchUserPhotosSuccess(fetchedPhotos));
       })
     .catch( err => {
       dispatch(fetchPhotosFail(err));
     } );
+  };
+};
+
+export const fetchFriendsPhotos = (userId) => {
+  return dispatch => {
+    dispatch(fetchFriendsPhotosStart());
+
+    let friendlst = [];
+    let fetchedPhotos = [];
+    firebase.database().ref('followings')
+      .child(userId)
+      .once('value')
+      .then((snapshot) => {
+        snapshot.forEach((friend) => {
+          friendlst.push({
+            ...friend.val(),
+          }) 
+        })
+      })
+      .then (() => {
+        Object.keys(friendlst).forEach((uid) => {
+          firebase.database().ref('photos')
+            .orderByChild('userId')
+            .equalTo(uid)
+            .once('value')
+            .then((snapshot) => {
+              snapshot.forEach((photo) => {
+                fetchedPhotos.push({
+                  ...photo.val(),
+                  id:photo.key,
+                }) 
+              })
+            })
+          .catch( err => {
+            dispatch(fetchPhotosFail(err));
+          });
+        })
+        dispatch(fetchFriendsPhotosSuccess(fetchedPhotos));
+      })
   };
 };

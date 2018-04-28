@@ -37,7 +37,6 @@ class Photos extends Component {
 	}
 
   render() {
-
     let photos = <Spin />;
     if ( !this.props.loading ) {
       photos = knuthShuffle(this.props.photos);
