@@ -4,22 +4,25 @@ import * as actions from '../../store/actions/index';
 
 import { Icon } from 'antd';
 
-const handleClick = (e) => {
-  e.preventDefault();
-  if (this.props.isFollowing) {
-    this.props.onUnfollowUser(this.props.followeeId);
-  } else {
-    this.props.onFollowUser(this.props.followerId);
-  }
-}
-
-
 class Follow extends Component {
+  handleClick = (e) => {
+    e.preventDefault();
+    if (!this.props.isFollowing) {
+      this.props.onUnfollowUser(this.props.followerId, this.props.followeeId);
+    } else {
+      this.props.onFollowUser(this.props.followerId, this.props.followeeId);
+    }
+  }
+
   render() {
     const followIcon= (this.props.isFollowing) ? "user-delete" : "user-add";
 
     return(
-      <Icon type= {followIcon} onClick={ this.handleClick } style={{fontSize: '16', pointer: 'cursor'}} />
+      <Icon 
+        type= {followIcon} 
+        onClick={ this.handleClick } 
+        style={{fontSize: '30', color: 'red', cursor: 'pointer'}} 
+      />
     );
   }
 }

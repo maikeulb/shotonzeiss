@@ -44,8 +44,8 @@ export const removeFollowingsFail = ( error ) => {
 export const addFollowings = ( followerId, followeeId ) => {
   return dispatch => {
     dispatch( addFollowingsStart() );
-    firebase.database().ref('following').child(followerId).set({
-      followeeId: true
+    firebase.database().ref('following').child(followerId).update({
+      [followeeId]:true
     })
       .then( ref => {
         dispatch( addFollowingsSuccess( followeeId ) );
@@ -59,8 +59,8 @@ export const addFollowings = ( followerId, followeeId ) => {
 export const removeFollowings = ( followerId, followeeId ) => {
   return dispatch => {
     dispatch( removeFollowingsStart() );
-    firebase.database().ref('following').child(followerId).remove({
-      followeeId: true
+    firebase.database().ref('following').child(followerId).update({
+      [followeeId]:null
     })
       .then( ref => {
         dispatch( removeFollowingsSuccess( followeeId ));
