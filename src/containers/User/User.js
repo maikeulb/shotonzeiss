@@ -23,7 +23,7 @@ class User extends Component {
       profile = (
         <div style={{textAlign: "left"}}>
           <Divider orientation="right"> <h2>{ this.props.photos[0].displayName } </h2> </Divider>
-          <Tabs tabPosition="top" tabBarStyle={{paddingLeft: '60px'}}>
+          <Tabs tabPosition="top" tabBarStyle={{paddingLeft: '80px'}}>
             <TabPane tab="Feed" key="1">
               <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
             </TabPane>

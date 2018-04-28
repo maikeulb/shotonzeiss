@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
-  margin-left: 60px;
+  margin-left: 80px;
   margin-right: 0px;
 
   @media screen and (max-width: 700px){
@@ -48,7 +48,7 @@ class Photos extends Component {
 
     const masonryOptions = {
       transitionDuration: 0,
-      fitWidth: false
+      fitWidth: true
     };
 
     let photoDetails = <Spin />;

@@ -89,19 +89,19 @@ class PhotoDetail extends Component {
               <ImgModal src={ photoUrl } alt="img" />
               <Footer>
                 <Span>
+                  <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
+                  <div>
+                    <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={avatarURL} alt=""/></span>
+                    <span style={{paddingRight:"10px", paddingBottom:"2px"}}>{ displayName } </span>
+                  </div>
+                  </StyledLink>
                   <span style={{paddingLeft:"5px", paddingBottom:"4px"}}>
                     <Moment fromNow> 
                       { dateCreated }  
                     </Moment>
                   </span>
-                  <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
-                  <div>
-                    <span style={{paddingRight:"10px", paddingBottom:"2px"}}>{ displayName } </span>
-                    <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={avatarURL} alt=""/></span>
-                  </div>
-              </StyledLink>
-               </Span>
-           </Footer>
+                </Span>
+              </Footer>
           </Modal>
 
       </div>
