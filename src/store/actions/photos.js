@@ -73,12 +73,6 @@ export const fetchAllPhotosStart = () => {
   };
 };
 
-export const fetchFollowingsStart = () => {
-  return {
-    type: actionTypes.FETCH_FOLLOWINGS_START
-  };
-};
-
 export const fetchUserPhotosStart = () => {
   return {
     type: actionTypes.FETCH_USER_PHOTOS_START
@@ -95,13 +89,6 @@ export const fetchAllPhotosSuccess = ( photos ) => {
   return {
     type: actionTypes.FETCH_ALL_PHOTOS_SUCCESS,
     photos: photos
-  };
-};
-
-export const fetchFollowingsSuccess = ( followings ) => {
-  return {
-    type: actionTypes.FETCH_FOLLOWINGS_SUCCESS,
-    followings: followings
   };
 };
 
@@ -122,13 +109,6 @@ export const fetchFriendsPhotosSuccess = ( photos ) => {
 export const fetchPhotosFail = ( error ) => {
   return {
     type: actionTypes.FETCH_PHOTOS_FAIL,
-    error: error
-  };
-};
-
-export const fetchFollowingsFail = ( error ) => {
-  return {
-    type: actionTypes.FETCH_FOLLOWINGS_FAIL,
     error: error
   };
 };
@@ -173,28 +153,6 @@ export const fetchUserPhotos = (userId) => {
       })
     .catch( err => {
       dispatch(fetchPhotosFail(err));
-    } );
-  };
-};
-
-
-export const fetchFollowings = (userId) => {
-  console.log('im called')
-  return dispatch => {
-    dispatch(fetchFollowingsStart());
-    firebase.database().ref('following')
-      .child(userId)
-      .once('value')
-      .then((snapshot) => {
-        const fetchedFollowings = [];
-        snapshot.forEach((photo) => {
-          fetchedFollowings.push(photo.key) 
-        })
-       console.log(fetchedFollowings)
-        dispatch(fetchFollowingsSuccess(fetchedFollowings));
-      })
-    .catch( err => {
-      dispatch(fetchFollowingsFail(err));
     } );
   };
 };

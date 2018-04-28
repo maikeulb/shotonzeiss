@@ -8,12 +8,14 @@ import thunk from 'redux-thunk';
 import * as actions from './store/actions/index';
 import photosReducer from './store/reducers/photos';
 import authReducer from './store/reducers/auth';
+import followingsReducer from './store/reducers/followings';
 
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
 const rootReducer = combineReducers({
   photos: photosReducer,
+  followings: followingsReducer,
   auth: authReducer,
 });
 

@@ -56,10 +56,11 @@ const mapStateToProps = state => {
   return {
     photos: state.photos.photos,
     friendsPhotos: state.photos.friendsPhotos,
-    followings: state.photos.followings,
+    followings: state.followings.followings,
     user: state.auth.user,
     auth: state.auth.user,
     loading: state.photos.loading,
+    loading: state.followings.loading,
   };
 };
 
