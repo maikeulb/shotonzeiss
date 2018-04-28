@@ -65,12 +65,12 @@ export const addFollowings = ( followerId, followeeId ) => {
           })
         // })
       .then( () => {
-        console.log(fetchedPhotos.ForEAch)
-        console.log(followerId)
-        firebase.database().ref('feeds')  
+        let promises= []; 
+        fetchedPhotos.forEach((photo)=>{
+        let promise= firebase.database().ref('feeds')  
           .child(followerId)
           .child('photos')
-          .push({ ...{fetchedPhotos}} )
+          .push({ ...photo} )
           .then( ref => {
             console.log(ref)
             dispatch( addFollowingsSuccess( followeeId ) );
@@ -78,6 +78,9 @@ export const addFollowings = ( followerId, followeeId ) => {
           .catch( error => {
             dispatch( addFollowingsFail( error ) );
           });
+          promises.push(promise);
+        });
+        return Promise.all(promises);
       });
   };
 };
