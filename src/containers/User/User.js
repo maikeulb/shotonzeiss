@@ -14,15 +14,15 @@ class User extends Component {
   componentDidMount() {
     this.props.onFetchUserPhotos(this.props.match.params.id);
     this.props.onFetchFriendsPhotos(this.props.match.params.id);
+    this.props.onFetchFollowings(this.props.match.params.id);
   }
 
   render() {
-    let profile = <Spin />;
+    const isFollowing = this.props.followings.includes(this.props.auth.uid)
 
     let follow;
-    console.log(this.props)
     if ( this.props.user.uid !== this.props.photos[0].userId) {
-      follow = <Follow />
+      follow = <Follow following = { isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
     }
 
     let friendPane;
@@ -34,6 +34,7 @@ class User extends Component {
       );
     }
 
+    let profile = <Spin />;
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
@@ -55,7 +56,9 @@ const mapStateToProps = state => {
   return {
     photos: state.photos.photos,
     friendsPhotos: state.photos.friendsPhotos,
+    followings: state.photos.followings,
     user: state.auth.user,
+    auth: state.auth.user,
     loading: state.photos.loading,
   };
 };
@@ -63,7 +66,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUserPhotos: (id) => dispatch( actions.fetchUserPhotos(id) ),
-    onFetchFriendsPhotos: (id) => dispatch( actions.fetchFriendsPhotos(id) )
+    onFetchFriendsPhotos: (id) => dispatch( actions.fetchFriendsPhotos(id) ),
+    onFetchFollowings: (id) => dispatch( actions.fetchFollowings(id) )
   };
 };
 

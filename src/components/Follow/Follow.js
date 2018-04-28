@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
 import { Icon } from 'antd';
 
-const isFollowing=true
+const handleClick = (e) => {
+  e.preventDefault();
+  if (this.props.isFollowing) {
+    this.props.onUnfollowUser(this.props.followeeId);
+  } else {
+    this.props.onFollowUser(this.props.followerId);
+  }
+}
 
-class Follow extends React.Component {
+
+class Follow extends Component {
   render() {
-    const followIcon= (isFollowing) ? "user-delete" : "user-add";
+    const followIcon= (this.props.isFollowing) ? "user-delete" : "user-add";
 
     return(
-      <Icon type= {followIcon} style={{fontSize: '16'}} />
+      <Icon type= {followIcon} onClick={ this.handleClick } style={{fontSize: '16', pointer: 'cursor'}} />
     );
   }
 
 }
 
 
-export default Follow;
+const mapStateToProps = state => {
+  return {
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // onFollowUser: (followerId, followeeId) => dispatch( actions.followUser(followerId, followeeId) ),
+    // onUnfollowUser: (followerId, followeeId) => dispatch( actions.unfollowUser(followerId, followeeId) ),
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( Follow );

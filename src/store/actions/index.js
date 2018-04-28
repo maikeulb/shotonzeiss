@@ -16,7 +16,11 @@ export {
   fetchFriendsPhotos,
   fetchFriendsPhotosSuccess,
   fetchFriendsPhotosStart,
-  fetchPhotosFail
+  fetchFollowings,
+  fetchFollowingsSuccess,
+  fetchFollowingsStart,
+  fetchPhotosFail,
+  fetchFollowingsFail
 } from './photos';
 export {
   startLogin,
