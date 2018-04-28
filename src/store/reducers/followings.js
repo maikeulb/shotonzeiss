@@ -6,6 +6,46 @@ const initialState = {
   loading: false,
 };
 
+const addFollowingsStart = ( state, action ) => {
+  return updateObject( state, 
+    { loading: true } 
+  );
+};
+
+const addFollowingsSuccess = ( state, action ) => {
+  const newFollowings = updateObject( action.followee );
+  return updateObject( state, {
+    loading: false,
+    followings: state.followings.concat( newFollowings ),
+  } );
+};
+
+const addFollowingsFail = ( state, action ) => {
+  return updateObject( state, { 
+    loading: false 
+  } );
+};
+
+const removeFollowingsStart = ( state, action ) => {
+  return updateObject( state, 
+    { loading: true } 
+  );
+};
+
+const removeFollowingsSuccess = ( state, action ) => {
+  const newFollowings = updateObject( action.follwee );
+  return updateObject( state, {
+    loading: false,
+    followings: state.followings.filter(item => item != newFollowings ),
+  } );
+};
+
+const removeFollowingsFail = ( state, action ) => {
+  return updateObject( state, { 
+    loading: false 
+  } );
+};
+
 const fetchFollowingsStart = ( state, action ) => {
   return updateObject( state, { 
     loading: true 

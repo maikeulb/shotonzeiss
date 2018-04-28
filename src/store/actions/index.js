@@ -16,12 +16,22 @@ export {
   fetchFriendsPhotos,
   fetchFriendsPhotosSuccess,
   fetchFriendsPhotosStart,
+  fetchPhotosFail,
+} from './photos';
+export {
+  addFollowings,
+  addFollowingsStart,
+  addFollowingsSuccess,
+  addFollowingsFail,
+  removeFollowings,
+  removeFollowingsStart,
+  removeFollowingsSuccess,
+  removeFollowingsFail,
   fetchFollowings,
   fetchFollowingsSuccess,
   fetchFollowingsStart,
-  fetchPhotosFail,
   fetchFollowingsFail
-} from './photos';
+} from './followings';
 export {
   startLogin,
   startLogout,

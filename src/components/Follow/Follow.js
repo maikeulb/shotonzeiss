@@ -22,7 +22,6 @@ class Follow extends Component {
       <Icon type= {followIcon} onClick={ this.handleClick } style={{fontSize: '16', pointer: 'cursor'}} />
     );
   }
-
 }
 
 
@@ -33,8 +32,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onFollowUser: (followerId, followeeId) => dispatch( actions.followUser(followerId, followeeId) ),
-    // onUnfollowUser: (followerId, followeeId) => dispatch( actions.unfollowUser(followerId, followeeId) ),
+    onFollowUser: (followerId, followeeId) => dispatch( actions.addFollowings(followerId, followeeId) ),
+    onUnfollowUser: (followerId, followeeId) => dispatch( actions.removeFollowings(followerId, followeeId) ),
   };
 };
 
