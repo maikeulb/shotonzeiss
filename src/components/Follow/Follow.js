@@ -8,20 +8,22 @@ class Follow extends Component {
   handleClick = (e) => {
     e.preventDefault();
     if (this.props.isFollowing) {
+      console.log('user is following')
       this.props.onUnfollowUser(this.props.followerId, this.props.followeeId);
     } else {
+      console.log('user is not following')
       this.props.onFollowUser(this.props.followerId, this.props.followeeId);
     }
   }
 
   render() {
-    const followIcon= (this.props.isFollowing) ? "user-delete" : "user-add";
+    let followIcon= (this.props.isFollowing) ? "user-delete" : "user-add";
 
     return(
       <Icon 
         type= {followIcon} 
         onClick={ this.handleClick } 
-        style={{fontSize: '30', color: 'red', cursor: 'pointer'}} 
+        style={{fontSize: '20px', cursor: 'pointer'}} 
       />
     );
   }

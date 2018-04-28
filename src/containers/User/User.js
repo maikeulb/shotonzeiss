@@ -23,22 +23,21 @@ class User extends Component {
   }
 
    
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log('user')
-  //   console.log(nextProps)
-  //   console.log(prevState)
-  //   return null;
-  //   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.followings.includes(nextProps.match.params.id) !== prevState.isFollowing) { 
+      return {
+         isFollowing: nextProps.followings.includes(nextProps.match.params.id) 
+      };
+    }
+    return null;
+  }
 
 
   render() {
     console.log(this.props.followings)
-    console.log(this.props.match.params.id)
-    console.log(this.state.isFollowing)
-    console.log(this.props.followings.includes(this.props.match.params.id))
     let follow;
     if ( this.props.auth.uid !== this.props.match.params.id) {
-      follow = <Follow following = { this.state.isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
+      follow = <Follow isFollowing = { this.state.isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
     }
 
     let friendPane;
@@ -76,7 +75,6 @@ const mapStateToProps = state => {
     user: state.auth.user,
     auth: state.auth.user,
     loading: state.photos.loading,
-    loading: state.followings.loading,
   };
 };
 

@@ -78,7 +78,6 @@ export const fetchFollowingsStart = () => {
 };
 
 export const fetchFollowingsSuccess = ( followings ) => {
-  console.log(followings)
   return {
     type: actionTypes.FETCH_FOLLOWINGS_SUCCESS,
     followings: followings
@@ -93,7 +92,6 @@ export const fetchFollowingsFail = ( error ) => {
 };
 
 export const fetchFollowings = (userId) => {
-  console.log(userId)
   return dispatch => {
     dispatch(fetchFollowingsStart());
     firebase.database().ref('following')
@@ -102,10 +100,8 @@ export const fetchFollowings = (userId) => {
       .then((snapshot) => {
         const fetchedFollowings = [];
         snapshot.forEach((photo) => {
-          console.log(photo)
           fetchedFollowings.push(photo.key) 
         })
-        console.log(fetchedFollowings)
         dispatch(fetchFollowingsSuccess(fetchedFollowings));
       })
     .catch( err => {

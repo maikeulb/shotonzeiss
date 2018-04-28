@@ -13,11 +13,7 @@ const addFollowingsStart = ( state, action ) => {
 };
 
 const addFollowingsSuccess = ( state, action ) => {
-  // const newFollowings = updateObject( action.followee );
   const newFollowings =  action.followee ;
-  console.log(newFollowings)
-  console.log(state.followings)
-  console.log(updateObject( state, { followings: state.followings.concat(newFollowings)}))
   return updateObject( state, {
     loading: false,
     followings: state.followings.concat( newFollowings ),
@@ -37,7 +33,7 @@ const removeFollowingsStart = ( state, action ) => {
 };
 
 const removeFollowingsSuccess = ( state, action ) => {
-  const newFollowings = updateObject( action.follwee );
+  const newFollowings =  action.followee ;
   return updateObject( state, {
     loading: false,
     followings: state.followings.filter(item => item != newFollowings ),
