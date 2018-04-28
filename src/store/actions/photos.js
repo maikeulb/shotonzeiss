@@ -157,6 +157,23 @@ export const fetchUserPhotos = (userId) => {
   };
 };
 
+function forEachPromise(items, fn) {
+    return items.reduce(function (promise, item) {
+        return promise.then(function () {
+            return fn(item);
+        });
+    }, Promise.resolve());
+}
+
+function logItem(item) {
+    return new Promise((resolve, reject) => {
+        process.nextTick(() => {
+            console.log(item);
+            resolve();
+        })
+    });
+}
+
 export const fetchFriendsPhotos = (userId) => {
   return dispatch => {
     dispatch(fetchFriendsPhotosStart());
@@ -174,13 +191,15 @@ export const fetchFriendsPhotos = (userId) => {
         })
       })
       .then (() => {
-        Object.keys(friendlst).forEach((uid) => {
+        ["1", "2"].forEach((uid) => {
           firebase.database().ref('photos')
             .orderByChild('userId')
             .equalTo(uid)
             .once('value')
             .then((snapshot) => {
               snapshot.forEach((photo) => {
+                console.log(photo)
+                console.log(uid)
                 fetchedPhotos.push({
                   ...photo.val(),
                   id:photo.key,

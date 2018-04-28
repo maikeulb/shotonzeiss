@@ -62,6 +62,12 @@ const fetchUserPhotosStart = ( state, action ) => {
   } );
 };
 
+const fetchFriendsPhotosStart = ( state, action ) => {
+  return updateObject( state, { 
+    loading: true 
+  } );
+};
+
 const fetchAllPhotosSuccess = ( state, action ) => {
   return updateObject( state, {
     photos: action.photos,
@@ -70,6 +76,13 @@ const fetchAllPhotosSuccess = ( state, action ) => {
 };
 
 const fetchUserPhotosSuccess = ( state, action ) => {
+  return updateObject( state, {
+    photos: action.photos,
+    loading: false
+  } );
+};
+
+const fetchFriendsPhotosSuccess = ( state, action ) => {
   return updateObject( state, {
     photos: action.photos,
     loading: false
@@ -94,6 +107,8 @@ const reducer = (state=initialState, action) => {
     case actionTypes.FETCH_ALL_PHOTOS_SUCCESS: return fetchAllPhotosSuccess(state, action);
     case actionTypes.FETCH_USER_PHOTOS_START: return fetchUserPhotosStart(state, action);
     case actionTypes.FETCH_USER_PHOTOS_SUCCESS: return fetchUserPhotosSuccess(state, action);
+    case actionTypes.FETCH_FRIENDS_PHOTOS_START: return fetchFriendsPhotosStart(state, action);
+    case actionTypes.FETCH_FRIENDS_PHOTOS_SUCCESS: return fetchFriendsPhotosSuccess(state, action);
     case actionTypes.FETCH_PHOTOS_FAIL: return fetchPhotosFail(state, action);
     default: return state; 
   }
