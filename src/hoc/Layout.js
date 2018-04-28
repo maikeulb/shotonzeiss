@@ -16,7 +16,6 @@ const Trigger = styled.div`
   font-size: 18px;
   line-height: 64px;
   padding: 0 24px;
-  cursor: pointer;
 }
 `;
 
@@ -130,7 +129,9 @@ class Layout extends Component {
             <Trigger>
               <Icon
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={this.toggle}/>
+                onClick={this.toggle}
+                style={{cursor:'pointer'}}
+              />
               </Trigger>
           </Header>
           <Content style={{ textAlign: 'center' }}>

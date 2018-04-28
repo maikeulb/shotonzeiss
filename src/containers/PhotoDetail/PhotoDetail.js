@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Modal } from 'antd';
-import './PhotoDetail.css';
+import { Modal, Avatar } from 'antd';
 import styled from 'styled-components';
-import { Avatar } from 'antd';
 import Moment from 'react-moment';
+import './PhotoDetail.css';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
