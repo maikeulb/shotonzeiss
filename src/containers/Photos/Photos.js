@@ -11,9 +11,9 @@ import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';
 import styled from 'styled-components';
 import { knuthShuffle } from 'knuth-shuffle';
+import './Photos.css';
 
 const Container= styled.div `
-  margin-left: 80px;
   margin-right: 0px;
 
   @media screen and (max-width: 700px){
@@ -48,7 +48,8 @@ class Photos extends Component {
 
     const masonryOptions = {
       transitionDuration: 0,
-      fitWidth: true
+      isFitWidth: true,
+      columWidth: 360,
     };
 
     let photoDetails = <Spin />;
@@ -70,6 +71,7 @@ class Photos extends Component {
         }}>
         <Masonry
           elementType={'ul'}
+          className='grid'
           options={ masonryOptions }
           disableImagesLoaded={ false }
 					onLayoutComplete={this.handleLayoutReady}

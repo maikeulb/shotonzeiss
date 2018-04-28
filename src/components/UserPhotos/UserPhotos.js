@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
-  margin-left: 80px;
   margin-right: 0;
 
   @media screen and (max-width: 700px){
@@ -23,9 +22,10 @@ const userPhotos = ( props ) => {
     photos = knuthShuffle(props.photos);
   }
 
-  let masonryOptions = {
+  const masonryOptions = {
     transitionDuration: 0,
-    fitWidth: true
+    isFitWidth: true,
+    columWidth: 360,
   };
 
   const photoDetails = photos.map( photo =>
@@ -39,6 +39,7 @@ const userPhotos = ( props ) => {
     <Container>
       <Masonry
         elementType={'ul'}
+        className='grid'
         options={ masonryOptions }
         disableImagesLoaded={ false }
         updateOnEachImageLoad={ false }

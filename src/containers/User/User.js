@@ -21,9 +21,9 @@ class User extends Component {
     let profile = <Spin />;
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
-        <div style={{textAlign: "left"}}>
+        <div>
           <Divider orientation="right"> <h2>{ this.props.photos[0].displayName } </h2> </Divider>
-          <Tabs tabPosition="top" tabBarStyle={{paddingLeft: '80px'}}>
+          <Tabs tabPosition="top">
             <TabPane tab="Feed" key="1">
               <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
             </TabPane>
