@@ -36,7 +36,7 @@ const removeFollowingsSuccess = ( state, action ) => {
   const newFollowings =  action.followee ;
   return updateObject( state, {
     loading: false,
-    followings: state.followings.filter(item => item != newFollowings ),
+    followings: state.followings.filter(item => item !== newFollowings ),
   } );
 };
 

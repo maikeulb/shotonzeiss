@@ -43,15 +43,41 @@ export const removeFollowingsFail = ( error ) => {
 
 export const addFollowings = ( followerId, followeeId ) => {
   return dispatch => {
+    const fetchedPhotos =[];
     dispatch( addFollowingsStart() );
-    firebase.database().ref('following').child(followerId).update({
-      [followeeId]:true
-    })
-      .then( ref => {
-        dispatch( addFollowingsSuccess( followeeId ) );
-      })
-      .catch( error => {
-        dispatch( addFollowingsFail( error ) );
+    // firebase.database().ref('following')
+      // .child(followerId)
+      // .update({
+        // [followeeId]:true
+      // })
+      // .then( () => {
+        firebase.database().ref('photos')
+          .orderByChild('userId')
+          .equalTo(followerId)
+          .once('value')
+          .then((snapshot) => {
+            snapshot.forEach((photo) => {
+              fetchedPhotos.push({
+                ...photo.val(),
+                id:photo.key,
+              })
+            })
+          })
+        // })
+      .then( () => {
+        console.log(fetchedPhotos.ForEAch)
+        console.log(followerId)
+        firebase.database().ref('feeds')  
+          .child(followerId)
+          .child('photos')
+          .push({ ...{fetchedPhotos}} )
+          .then( ref => {
+            console.log(ref)
+            dispatch( addFollowingsSuccess( followeeId ) );
+          })
+          .catch( error => {
+            dispatch( addFollowingsFail( error ) );
+          });
       });
   };
 };

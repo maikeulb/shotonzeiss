@@ -8,10 +8,8 @@ class Follow extends Component {
   handleClick = (e) => {
     e.preventDefault();
     if (this.props.isFollowing) {
-      console.log('user is following')
       this.props.onUnfollowUser(this.props.followerId, this.props.followeeId);
     } else {
-      console.log('user is not following')
       this.props.onFollowUser(this.props.followerId, this.props.followeeId);
     }
   }

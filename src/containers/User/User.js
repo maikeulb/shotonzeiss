@@ -34,7 +34,6 @@ class User extends Component {
 
 
   render() {
-    console.log(this.props.followings)
     let follow;
     if ( this.props.auth.uid !== this.props.match.params.id) {
       follow = <Follow isFollowing = { this.state.isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
