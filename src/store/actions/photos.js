@@ -44,13 +44,48 @@ export const uploadPhotoFail = () => {
 export const submitPhoto = ( photoData, token ) => {
   return dispatch => {
     dispatch( submitPhotoStart() );
-    firebase.database().ref('photos').push({...photoData})
+    const fetchedFollowers =[];
+    const promises= []; 
+    console.log(photoData.userId)
+
+    const promiseA=firebase.database()
+      .ref('photos')
+      .push({...photoData})
+    promises.push(promiseA);
+
+    const promiseB=firebase.database()
+      .ref('followers')
+      .child(photoData.userId)
+      .once('value')
+    promises.push(promiseB);
+
+    const promiseC=promiseB
+      .then( (snap) => {
+        snap.forEach((follower) => {
+          fetchedFollowers.push(follower.key)
+        });
+      });
+    promises.push(promiseC)
+        
+    promiseC.then( () => {
+      fetchedFollowers.forEach((follower)=> {
+        promises.push(firebase.database()
+          .ref('feeds')  
+          .child(follower)
+          .child('photos')
+          .push({...photoData})
+        )
+      })
+    });
+
+    Promise.all(promises)
       .then( ref => {
         dispatch( submitPhotoSuccess( ref.key, photoData ) );
-      } )
+      })
       .catch( error => {
         dispatch( submitPhotoFail( error ) );
-      } );
+      })
+
   };
 };
 

@@ -97,14 +97,16 @@ export const removeFollowings = ( followerId, followeeId ) => {
     const promises= []; 
     dispatch( removeFollowingsStart() );
 
-    const promiseA=firebase.database().ref('following')
+    const promiseA=firebase.database()
+      .ref('following')
       .child(followerId)
       .update({
         [followeeId]:null
       });
     promises.push(promiseA)
 
-    const promiseB=firebase.database().ref('feeds')
+    const promiseB=firebase.database()
+      .ref('feeds')
       .child(followerId)
       .child('photos')
       .orderByChild('userId')
@@ -124,8 +126,8 @@ export const removeFollowings = ( followerId, followeeId ) => {
         
     promiseC.then( () => {
       fetchedPhotos.forEach((photo)=> {
-        console.log(photo.id);
-        promises.push(firebase.database().ref('feeds')  
+        promises.push(firebase.database()
+          .ref('feeds')  
           .child(followerId)
           .child('photos')
           .child(photo.id)
@@ -133,7 +135,7 @@ export const removeFollowings = ( followerId, followeeId ) => {
         )
       })
     });
-    console.log(promises)
+
     Promise.all(promises)
       .then( () => {
         dispatch( removeFollowingsSuccess( followeeId ) );
@@ -167,7 +169,8 @@ export const fetchFollowingsFail = ( error ) => {
 export const fetchFollowings = (userId) => {
   return dispatch => {
     dispatch(fetchFollowingsStart());
-    firebase.database().ref('following')
+    firebase.database()
+      .ref('following')
       .child(userId)
       .once('value')
       .then((snapshot) => {

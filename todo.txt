@@ -1,9 +1,1 @@
-class form extens react.component.
-
-handleSubmit = (event) =>
-event.preventDefault
-
-<form onSubmit>
- onChange (event) => this.setState( event.target.value)
- </form>;wqa
-
+add visual feedback (noty)
