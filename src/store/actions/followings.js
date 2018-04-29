@@ -44,43 +44,49 @@ export const removeFollowingsFail = ( error ) => {
 export const addFollowings = ( followerId, followeeId ) => {
   return dispatch => {
     const fetchedPhotos =[];
+    const promises= []; 
     dispatch( addFollowingsStart() );
-    // firebase.database().ref('following')
-      // .child(followerId)
-      // .update({
-        // [followeeId]:true
-      // })
-      // .then( () => {
-        firebase.database().ref('photos')
-          .orderByChild('userId')
-          .equalTo(followerId)
-          .once('value')
-          .then((snapshot) => {
-            snapshot.forEach((photo) => {
-              fetchedPhotos.push({
-                ...photo.val(),
-                id:photo.key,
-              })
-            })
+
+    const promiseA=firebase.database().ref('following')
+      .child(followerId)
+      .update({
+        [followeeId]:true
+      });
+    promises.push(promiseA)
+
+    const promiseB=firebase.database().ref('photos')
+      .orderByChild('userId')
+      .equalTo(followerId)
+      .once('value');
+    promises.push(promiseB)
+
+    const promiseC=promiseB
+      .then( (snap) => {
+        snap.forEach((photo) => {
+          fetchedPhotos.push({
+             ...photo.val(),
+             id:photo.key
           })
-        // })
-      .then( () => {
-        let promises= []; 
-        fetchedPhotos.forEach((photo)=>{
-        let promise= firebase.database().ref('feeds')  
+        });
+      });
+    promises.push(promiseC)
+        
+    promiseC.then( () => {
+      fetchedPhotos.forEach((photo)=> {
+        promises.push(firebase.database().ref('feeds')  
           .child(followerId)
           .child('photos')
           .push({ ...photo} )
-          .then( ref => {
-            console.log(ref)
-            dispatch( addFollowingsSuccess( followeeId ) );
-          })
-          .catch( error => {
-            dispatch( addFollowingsFail( error ) );
-          });
-          promises.push(promise);
-        });
-        return Promise.all(promises);
+        )
+      })
+    });
+
+    Promise.all(promises)
+      .then( () => {
+        dispatch( addFollowingsSuccess( followeeId ) );
+      })
+      .catch( error => {
+        dispatch( addFollowingsFail( error ) );
       });
   };
 };
