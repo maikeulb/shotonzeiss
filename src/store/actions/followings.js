@@ -56,7 +56,7 @@ export const addFollowings = ( followerId, followeeId ) => {
 
     const promiseB=firebase.database().ref('photos')
       .orderByChild('userId')
-      .equalTo(followerId)
+      .equalTo(followeeId)
       .once('value');
     promises.push(promiseB)
 
@@ -76,7 +76,7 @@ export const addFollowings = ( followerId, followeeId ) => {
         promises.push(firebase.database().ref('feeds')  
           .child(followerId)
           .child('photos')
-          .push({ ...photo} )
+          .push({ ...photo})
         )
       })
     });
@@ -93,12 +93,50 @@ export const addFollowings = ( followerId, followeeId ) => {
 
 export const removeFollowings = ( followerId, followeeId ) => {
   return dispatch => {
+    const fetchedPhotos =[];
+    const promises= []; 
     dispatch( removeFollowingsStart() );
-    firebase.database().ref('following').child(followerId).update({
-      [followeeId]:null
-    })
-      .then( ref => {
-        dispatch( removeFollowingsSuccess( followeeId ));
+
+    const promiseA=firebase.database().ref('following')
+      .child(followerId)
+      .update({
+        [followeeId]:null
+      });
+    promises.push(promiseA)
+
+    const promiseB=firebase.database().ref('feeds')
+      .child(followerId)
+      .child('photos')
+      .orderByChild('userId')
+      .equalTo(followeeId)
+      .once('value');
+    promises.push(promiseB)
+
+    const promiseC=promiseB
+      .then( (snap) => {
+        snap.forEach((photo) => {
+          fetchedPhotos.push({
+             id:photo.key
+          })
+        });
+      });
+    promises.push(promiseC)
+        
+    promiseC.then( () => {
+      fetchedPhotos.forEach((photo)=> {
+        console.log(photo.id);
+        promises.push(firebase.database().ref('feeds')  
+          .child(followerId)
+          .child('photos')
+          .child(photo.id)
+          .remove()
+        )
+      })
+    });
+    console.log(promises)
+    Promise.all(promises)
+      .then( () => {
+        dispatch( removeFollowingsSuccess( followeeId ) );
       })
       .catch( error => {
         dispatch( removeFollowingsFail( error ) );
