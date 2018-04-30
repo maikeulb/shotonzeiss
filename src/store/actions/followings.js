@@ -47,7 +47,7 @@ export const addFollowings = ( followerId, followeeId ) => {
     const promises= []; 
     dispatch( addFollowingsStart() );
 
-    const promiseA=firebase.database().ref('following')
+    const promiseA=firebase.database().ref('followings')
       .child(followerId)
       .update({
         [followeeId]:true
@@ -98,7 +98,7 @@ export const removeFollowings = ( followerId, followeeId ) => {
     dispatch( removeFollowingsStart() );
 
     const promiseA=firebase.database()
-      .ref('following')
+      .ref('followings')
       .child(followerId)
       .update({
         [followeeId]:null
@@ -170,7 +170,7 @@ export const fetchFollowings = (userId) => {
   return dispatch => {
     dispatch(fetchFollowingsStart());
     firebase.database()
-      .ref('following')
+      .ref('followings')
       .child(userId)
       .once('value')
       .then((snapshot) => {

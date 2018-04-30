@@ -46,7 +46,6 @@ export const submitPhoto = ( photoData, token ) => {
     dispatch( submitPhotoStart() );
     const fetchedFollowers =[];
     const promises= []; 
-    console.log(photoData.userId)
 
     const promiseA=firebase.database()
       .ref('photos')
@@ -80,7 +79,7 @@ export const submitPhoto = ( photoData, token ) => {
 
     Promise.all(promises)
       .then( ref => {
-        dispatch( submitPhotoSuccess( ref.key, photoData ) );
+        dispatch( submitPhotoSuccess( ref[0].key, photoData ) );
       })
       .catch( error => {
         dispatch( submitPhotoFail( error ) );

@@ -50,6 +50,7 @@ class Photos extends Component {
 
     let photoDetails = <Spin />;
     if ( !this.props.loading ) {
+      console.log( photos.map(photo => photo.id) )
       photoDetails = photos.map( photo =>
         <PhotoDetail
           key={ photo.id }
