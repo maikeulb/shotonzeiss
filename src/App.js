@@ -15,21 +15,19 @@ class App extends Component {
   render () {
     let routes = (
       <Switch>
+        <Route exact path="/" component={Photos} />
         <Route path="/login" component={Login} />
-        <Route path="/" exact component={Photos} />
-        <Redirect to="/" />
       </Switch>
     );
 
     if ( this.props.isAuthenticated ) {
       routes = (
         <Switch>
+          <Route exact path="/" component={Photos} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/upload" component={Upload} />
           <Route path="/users/:id" component={User} />
-          <Route path="/" exact component={Photos} />
-          <Redirect to="/" />
         </Switch>
       );
     }
