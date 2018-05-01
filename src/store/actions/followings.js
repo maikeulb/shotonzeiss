@@ -47,20 +47,30 @@ export const addFollowings = ( followerId, followeeId ) => {
     const promises= []; 
     dispatch( addFollowingsStart() );
 
-    const promiseA=firebase.database().ref('followings')
+    const promiseA=firebase.database()
+      .ref('followings')
       .child(followerId)
       .update({
         [followeeId]:true
       });
     promises.push(promiseA)
 
-    const promiseB=firebase.database().ref('photos')
+    const promiseB=firebase.database()
+      .ref('followers')
+      .child(followeeId)
+      .update({
+        [followerId]:true
+      });
+    promises.push(promiseB)
+
+    const promiseC=firebase.database()
+      .ref('photos')
       .orderByChild('userId')
       .equalTo(followeeId)
       .once('value');
-    promises.push(promiseB)
+    promises.push(promiseC)
 
-    const promiseC=promiseB
+    const promiseD=promiseC
       .then( (snap) => {
         snap.forEach((photo) => {
           fetchedPhotos.push({
@@ -69,9 +79,9 @@ export const addFollowings = ( followerId, followeeId ) => {
           })
         });
       });
-    promises.push(promiseC)
+    promises.push(promiseD)
         
-    promiseC.then( () => {
+    promiseD.then( () => {
       fetchedPhotos.forEach((photo)=> {
         promises.push(firebase.database().ref('feeds')  
           .child(followerId)
@@ -106,15 +116,23 @@ export const removeFollowings = ( followerId, followeeId ) => {
     promises.push(promiseA)
 
     const promiseB=firebase.database()
+      .ref('followers')
+      .child(followeeId)
+      .update({
+        [followerId]:null
+      });
+    promises.push(promiseB)
+
+    const promiseC=firebase.database()
       .ref('feeds')
       .child(followerId)
       .child('photos')
       .orderByChild('userId')
       .equalTo(followeeId)
       .once('value');
-    promises.push(promiseB)
+    promises.push(promiseC)
 
-    const promiseC=promiseB
+    const promiseD=promiseC
       .then( (snap) => {
         snap.forEach((photo) => {
           fetchedPhotos.push({
@@ -122,9 +140,9 @@ export const removeFollowings = ( followerId, followeeId ) => {
           })
         });
       });
-    promises.push(promiseC)
+    promises.push(promiseD)
         
-    promiseC.then( () => {
+    promiseD.then( () => {
       fetchedPhotos.forEach((photo)=> {
         promises.push(firebase.database()
           .ref('feeds')  
