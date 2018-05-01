@@ -19,7 +19,7 @@ const Container= styled.div `
 const userPhotos = ( props ) => {
   let photos = <Spin />;
   if ( !props.loading ) {
-    photos = knuthShuffle(props.photos);
+    photos = props.photos;
   }
 
   const masonryOptions = {
