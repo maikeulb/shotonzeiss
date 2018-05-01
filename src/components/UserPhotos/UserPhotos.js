@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import PhotoDetail from '../../containers/PhotoDetail/PhotoDetail';
 
@@ -52,4 +53,4 @@ const userPhotos = ( props ) => {
   return masonry;
 }
 
-export default userPhotos;
+export default withRouter(userPhotos);

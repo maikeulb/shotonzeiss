@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 
 import PhotoDetail from '../PhotoDetail/PhotoDetail';
@@ -50,7 +51,6 @@ class Photos extends Component {
 
     let photoDetails = <Spin />;
     if ( !this.props.loading ) {
-      console.log( photos.map(photo => photo.id) )
       photoDetails = photos.map( photo =>
         <PhotoDetail
           key={ photo.id }
@@ -97,4 +97,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( Photos  );
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Photos ));

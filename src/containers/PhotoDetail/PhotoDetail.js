@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Modal, Avatar } from 'antd';
 import styled from 'styled-components';
 import Moment from 'react-moment';
@@ -109,4 +110,4 @@ class PhotoDetail extends Component {
   }
 }
 
-export default PhotoDetail;
+export default withRouter(PhotoDetail);

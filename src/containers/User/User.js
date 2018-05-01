@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import UserPhotos from '../../components/UserPhotos/UserPhotos';
@@ -11,32 +12,49 @@ import './User.css';
 const TabPane = Tabs.TabPane
 
 class User extends Component {
-  state = {
-    isFollowing: this.props.followings.includes(this.props.match.params.id)
-  };
 
+  state = {};
 
-  componentDidMount() {
-    this.props.onFetchUserPhotos(this.props.match.params.id);
-    this.props.onFetchFriendsPhotos(this.props.match.params.id);
-    this.props.onFetchFollowings(this.props.auth.uid);
-  }
-
-   
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.followings.includes(nextProps.match.params.id) !== prevState.isFollowing) { 
+    if(nextProps.match.params.id !== prevState.prevUserId) {
       return {
-         isFollowing: nextProps.followings.includes(nextProps.match.params.id) 
+         prevUserId: nextProps.match.params.id,
+         profileOrError: null
       };
     }
     return null;
   }
 
+  componentDidMount() {
+    this.props.onFetchUserPhotos(this.props.match.params.id);
+    this.props.onFetchFriendsPhotos(this.props.match.params.id);
+    this.props.onFetchFollowings(this.props.auth.uid);
+      this.setState({ 
+        profileOrError: true 
+      });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.profileOrError === null) {
+      this.props.onFetchUserPhotos(this.props.match.params.id);
+      this.props.onFetchFriendsPhotos(this.props.match.params.id);
+      this.props.onFetchFollowings(this.props.auth.uid);
+      this.setState({ 
+        profileOrError: true
+      });
+    }
+  }
 
   render() {
     let follow;
     if ( this.props.auth.uid !== this.props.match.params.id) {
-      follow = <Follow isFollowing = { this.state.isFollowing } followeeId={ this.props.match.params.id } followerId = { this.props.auth.uid } />
+      follow =  (
+        <Follow 
+        isFollowing = { this.props.followings.includes(this.props.match.params.id)}
+        followeeId = { this.props.match.params.id }
+        followerId = { this.props.auth.uid }
+      />
+      );
     }
 
     let friendPane;
@@ -52,7 +70,7 @@ class User extends Component {
     if ( !this.props.loading && this.props.photos[0]) {
       profile = (
         <div>
-          <Divider orientation="right"> <span><h2>{ this.props.photos[0].displayName } </h2> { follow }</span></Divider>
+          <Divider orientation="right"> <span><h2>{ this.props.photos[0].displayName } </h2>{ follow } </span></Divider>
           <Tabs tabPosition="top">
             <TabPane tab="Feed" key="1">
               <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
@@ -85,4 +103,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( User );
+export default withRouter(connect( mapStateToProps, mapDispatchToProps)( User ));
