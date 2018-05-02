@@ -50,14 +50,31 @@ export const startLogout = () => {
 
 export const startLogin = () => {
   return dispatch => {
-    firebase.auth().signInWithPopup(googleProvider)
-      .then(response => {
-         console.log(response)
-         dispatch(authLogin(response.user, response.credential.accessToken));
+    const promises= []; 
+
+    const promiseA=firebase.auth().signInWithPopup(googleProvider)
+    promises.push(promiseA);
+
+    const promiseB=promiseA
+    .then((resp) => {
+      firebase.database()
+      .ref('users')
+      .child(resp.user.uid)
+        .update({
+          displayName: resp.user.displayName,
+          photoUrl: resp.user.photoURL,      
+          lastActive: firebase.database.ServerValue.TIMESTAMP
+        })
+    });
+    promises.push(promiseB);
+
+    Promise.all(promises)
+      .then( response => {
+        dispatch( authLogin( response[0].user, response[0].credential.accessToken));
       })
-      .catch(err => {
-         dispatch(authFail(err.message));
-      });
+      .catch( error => {
+        dispatch( authFail( error.message ) );
+      })
   };
 };
 
