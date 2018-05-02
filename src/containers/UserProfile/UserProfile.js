@@ -71,7 +71,7 @@ class UserProfile extends Component {
         <div>
           <Divider orientation="right"> <span><h2>{ this.props.photos[0].displayName } </h2>{ follow } </span></Divider>
           <Tabs tabPosition="top">
-            <TabPane tab="Feed" key="1">
+            <TabPane tab="Photostream" key="1">
               <UserPhotos photos={ this.props.photos } userId={ this.props.photos[0].userId }/>
             </TabPane>
             { friendPane }
