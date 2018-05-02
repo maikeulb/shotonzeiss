@@ -7,11 +7,11 @@ import Follow from '../../components/Follow/Follow';
 
 import * as actions from '../../store/actions/index';
 import { Spin, Divider, Tabs } from 'antd';
-import './User.css';
+import './UserProfile.css';
 
 const TabPane = Tabs.TabPane
 
-class User extends Component {
+class UserProfile extends Component {
   state = {};
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -101,4 +101,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect( mapStateToProps, mapDispatchToProps)( User ));
+export default withRouter(connect( mapStateToProps, mapDispatchToProps)( UserProfile ));

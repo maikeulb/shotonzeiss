@@ -7,7 +7,7 @@ import Photos from './containers/Photos/Photos';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import Upload from './components/Upload/Upload';
-import User from './containers/User/User';
+import UserProfile from './containers/UserProfile/UserProfile';
 import './App.css';
 
 
@@ -27,7 +27,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/upload" component={Upload} />
-          <Route path="/users/:id" component={User} />
+          <Route path="/users/:id" component={UserProfile} />
         </Switch>
       );
     }
