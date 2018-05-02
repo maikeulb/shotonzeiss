@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 
-import PhotoDetail from '../PhotoDetail/PhotoDetail';
+import PhotoDetail from '../../components/PhotoDetail/PhotoDetail';
 
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';

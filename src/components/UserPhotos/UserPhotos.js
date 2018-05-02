@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import PhotoDetail from '../../containers/PhotoDetail/PhotoDetail';
+import PhotoDetail from '../PhotoDetail/PhotoDetail';
 
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';
