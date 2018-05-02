@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Modal, Avatar } from 'antd';
 import styled from 'styled-components';
 import Moment from 'react-moment';
-import './PhotoDetail.css';
+import './PhotoDetails.css';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -48,7 +48,7 @@ const Span = styled.span `
   justify-content: space-between;
 `;
 
-class PhotoDetail extends Component {
+class PhotoDetails extends Component {
   state = {
     visible: false
   }
@@ -110,4 +110,4 @@ class PhotoDetail extends Component {
   }
 }
 
-export default withRouter(PhotoDetail);
+export default withRouter(PhotoDetails);

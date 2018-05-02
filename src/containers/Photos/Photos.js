@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 
-import PhotoDetail from '../../components/PhotoDetail/PhotoDetail';
+import PhotoDetails from '../../components/PhotoDetails/PhotoDetails';
 
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';
@@ -52,7 +52,7 @@ class Photos extends Component {
     let photoDetails = <Spin />;
     if ( !this.props.loading ) {
       photoDetails = photos.map( photo =>
-        <PhotoDetail
+        <PhotoDetails
           key={ photo.id }
           photo={ photo }
         />
