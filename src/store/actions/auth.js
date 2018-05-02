@@ -62,7 +62,7 @@ export const startLogin = () => {
       .child(resp.user.uid)
         .update({
           displayName: resp.user.displayName,
-          photoUrl: resp.user.photoURL,      
+          avatarUrl: resp.user.photoURL,      
           lastActive: firebase.database.ServerValue.TIMESTAMP
         })
     });

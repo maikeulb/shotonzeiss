@@ -50,7 +50,7 @@ class Layout extends Component {
      photoUrl: this.props.photoUrl,
      userId: this.props.user.uid,
      displayName: this.props.user.displayName,
-     avatarURL: this.props.user.photoURL,
+     avatarUrl: this.props.user.photoURL,
      dateCreated: moment().toISOString()
     }
     this.setState({

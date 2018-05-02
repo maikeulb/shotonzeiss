@@ -72,7 +72,7 @@ class PhotoDetail extends Component {
   }
 
   render() {
-    const { photoUrl, dateCreated, displayName, avatarURL, userId } = this.props.photo;
+    const { photoUrl, dateCreated, displayName, avatarUrl, userId } = this.props.photo;
     return(
       <div>
         <Li>
@@ -92,7 +92,7 @@ class PhotoDetail extends Component {
                 <Span>
                   <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
                   <div>
-                    <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={avatarURL} alt=""/></span>
+                    <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={avatarUrl} alt=""/></span>
                     <span style={{paddingRight:"10px", paddingBottom:"2px"}}>{ displayName } </span>
                   </div>
                   </StyledLink>
