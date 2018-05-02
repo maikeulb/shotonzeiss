@@ -33,6 +33,12 @@ export {
   fetchFollowingsFail
 } from './followings';
 export {
+  fetchUsers,
+  fetchUsersStart,
+  fetchUsersSuccess,
+  fetchUsersFail
+} from './users';
+export {
   startLogin,
   startLogout,
   setAuthRedirectPath,

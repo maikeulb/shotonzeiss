@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 
+import UserDetails from '../../components/UserDetails/UserDetails';
+
 import { Spin } from 'antd';
 import styled from 'styled-components';
 
@@ -17,7 +19,7 @@ const Container= styled.div `
 
 class Users extends Component {
   componentDidMount() {
-    this.props.onFetchAllUsers();
+    this.props.onFetchUsers();
   }
 
   render() {
@@ -25,13 +27,13 @@ class Users extends Component {
     if ( !this.props.loading ) {
       users = this.props.users;
     }
-
+    { console.log(this.props.users) }
     let userDetails = <Spin />;
     if ( !this.props.loading ) {
-      userDetails = users.map( photo =>
-        <UserDetail
+      userDetails = users.map( user =>
+        <UserDetails
           key={ user.id }
-          photo={ user }
+          user={ user }
         />
       );
     }
@@ -46,14 +48,14 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users.photos,
+    users: state.users.users,
     loading: state.users.loading,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchAllUsers: () => dispatch( actions.fetchAllUsers() ),
+    onFetchUsers: () => dispatch( actions.fetchUsers() ),
   };
 };
 

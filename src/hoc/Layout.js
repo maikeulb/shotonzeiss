@@ -98,8 +98,11 @@ class Layout extends Component {
     const profile = this.props.isAuthenticated ? 
               (<Menu.Item key="1"><Link to={`/users/${this.props.user.uid}`}><span>Profile</span></Link></Menu.Item>):
               ("")
+    const people = this.props.isAuthenticated ? 
+              (<Menu.Item key="2"><Link to={`/people`}><span>People</span></Link></Menu.Item>):
+              ("")
     const upload = this.props.isAuthenticated ? 
-              (<Menu.Item key="2"><span onClick={ this.showModal }>Upload</span></Menu.Item>):
+              (<Menu.Item key="3"><span onClick={ this.showModal }>Upload</span></Menu.Item>):
               ("")
     const auth = this.props.isAuthenticated ? 
               (<Link to='/logout'><span>Logout</span></Link>):
@@ -120,8 +123,9 @@ class Layout extends Component {
             </Logo>
             <Menu theme="light" mode="inline" >
               { profile }
+              { people }
               { upload }
-              <Menu.Item key="3">{ auth }</Menu.Item>
+              <Menu.Item key="5">{ auth }</Menu.Item>
             </Menu>
           </Sider>
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Layout from './hoc/Layout';
 import Photos from './containers/Photos/Photos';
+import Users from './containers/Users/Users';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import Upload from './components/Upload/Upload';
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/logout" component={Logout} />
           <Route path="/upload" component={Upload} />
           <Route path="/users/:id" component={UserProfile} />
+          <Route path="/people" component={Users} />
         </Switch>
       );
     }

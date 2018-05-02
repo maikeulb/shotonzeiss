@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import PhotoDetail from '../PhotoDetail/PhotoDetail';
+import PhotoDetails from '../PhotoDetails/PhotoDetails';
 
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';
@@ -30,7 +30,7 @@ const userPhotos = ( props ) => {
   };
 
   const photoDetails = photos.map( photo =>
-    <PhotoDetail
+    <PhotoDetails
       key={ photo.id }
       photo={ photo }
     />

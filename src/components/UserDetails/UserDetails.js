@@ -4,14 +4,13 @@ import { withRouter } from 'react-router-dom';
 import { Modal, Avatar } from 'antd';
 import styled from 'styled-components';
 import Moment from 'react-moment';
-import './PhotoDetail.css';
 
 const StyledLink = styled(Link)`
-    text-decoration: none;
+  text-decoration: none;
 
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
+  &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;
+  }
 `;
 
 const Img = styled.img `
@@ -49,17 +48,23 @@ const Span = styled.span `
 `;
 
 class UserDetails extends Component {
-  state = {
-    visible: false
-  }
-
   render() {
     return(
-      <div>
         <Li>
-          <Img src={ this.props.user.avatarUrl }  alt="img"  onClick={ this.showModal }></Img>
+            <span style={{paddingRight:"5px"}}><Avatar size="large" shape="square" src={this.props.user.avatarUrl} alt=""/></span>
+            <Span>
+              <StyledLink to={`/users/${this.props.user.id}`}>
+              <div>
+                <span style={{paddingRight:"10px", paddingBottom:"2px"}}>{ this.props.user.displayName } </span>
+              </div>
+              </StyledLink>
+              <span style={{paddingLeft:"5px", paddingBottom:"4px"}}>
+                <Moment fromNow> 
+                  { this.props.user.lastActive }  
+                </Moment>
+              </span>
+            </Span>
         </Li>
-      </div>
     );
   }
 }

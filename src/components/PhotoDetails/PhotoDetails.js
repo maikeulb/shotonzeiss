@@ -7,11 +7,11 @@ import Moment from 'react-moment';
 import './PhotoDetails.css';
 
 const StyledLink = styled(Link)`
-    text-decoration: none;
+  text-decoration: none;
 
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
+  &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;
+  }
 `;
 
 const Img = styled.img `
@@ -88,6 +88,7 @@ class PhotoDetails extends Component {
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
+
               <Footer>
                 <Span>
                   <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
@@ -103,6 +104,7 @@ class PhotoDetails extends Component {
                   </span>
                 </Span>
               </Footer>
+
           </Modal>
 
       </div>
