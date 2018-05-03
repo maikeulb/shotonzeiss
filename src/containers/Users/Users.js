@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
-import { Row, Col } from 'antd';
+import { Row, Col, Input, Icon } from 'antd';
 
 
 import Follow from '../../components/Follow/Follow';
@@ -11,7 +11,20 @@ import Follow from '../../components/Follow/Follow';
 import { List, Button, Spin, Avatar, Card } from 'antd';
 import styled from 'styled-components';
 
-const Container= styled.div `
+const Search = Input.Search;
+
+const SearchDiv= styled.div `
+  margin: 0 auto;
+  width: 400px;
+  padding: 10px;
+
+  @media screen and (max-width: 400px){
+    padding: 5px;
+    width: 100%;
+  }
+`;
+
+const Container = styled.div `
   margin-right: 0px;
 
   @media screen and (max-width: 700px){
@@ -27,20 +40,40 @@ class Users extends Component {
     this.props.onFetchFollowings(this.props.auth.uid);
   }
 
+  state = {
+     username: ''
+  };
+
+  updateSearch = (event) => {
+    this.setState({ 
+      username: event.target.value.substr(0, 20)
+    })
+  }
+
   render() {
-    let users = <Spin />;
+    let filteredUsers = <Spin />;
     if ( !this.props.loading ) {
-      users = this.props.users;
-    }
+      filteredUsers = this.props.users.filter( user => {
+       return user.displayName.toLowerCase().indexOf(this.state.username) !== -1;
+      })
+    };
+
+    const search = (
+      <Search 
+          placeholder="Enter a username" 
+          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          type="text" 
+          value={this.state.username} 
+          onChange={this.updateSearch}
+        />
+    );
 
     const userDetails = ( 
-    <Row type="flex" justify="center">
-      <Col xs={22} s={20} m={16} xl={12}>
       <List
         className="demo-loadmore-list"
         loading={this.props.loading}
         itemLayout="horizontal"
-        dataSource={this.props.users}
+        dataSource={filteredUsers}
         renderItem={user => (
           <List.Item>
             <List.Item.Meta
@@ -58,14 +91,19 @@ class Users extends Component {
           </List.Item>
         )}
       />
-    </Col>
-     </Row>
     );
 
     return (
-      <Container>
-        { userDetails }
-      </Container>
+    <Row type="flex" justify="center">
+      <Col xs={22} s={18} m={12} lg={10} xl={10}>
+        <Container>
+          <SearchDiv>
+            { search }
+          </SearchDiv>
+          { userDetails }
+        </Container>
+      </Col>
+     </Row>
     );
   }
 }
