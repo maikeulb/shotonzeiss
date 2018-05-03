@@ -6,7 +6,6 @@ import PhotoDetails from '../PhotoDetails/PhotoDetails';
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-component';
 import styled from 'styled-components';
-import { knuthShuffle } from 'knuth-shuffle';
 
 const Container= styled.div `
   margin-right: 0;

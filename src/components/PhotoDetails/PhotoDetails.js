@@ -78,7 +78,6 @@ class PhotoDetails extends Component {
         <Li>
           <Img src={ photoUrl }  alt="img"  onClick={ this.showModal }></Img>
         </Li>
-
           <Modal 
             visible={ this.state.visible }
             wrapClassName="vertical-center-modal"
@@ -88,7 +87,6 @@ class PhotoDetails extends Component {
             onCancel={ this.handleCancel }
             onCreate={ this.handleCancel }>
               <ImgModal src={ photoUrl } alt="img" />
-
               <Footer>
                 <Span>
                   <StyledLink onClick={ this.closeModal } to={`/users/${userId}`}>
@@ -104,9 +102,7 @@ class PhotoDetails extends Component {
                   </span>
                 </Span>
               </Footer>
-
           </Modal>
-
       </div>
     );
   }

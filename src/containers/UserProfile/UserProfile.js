@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import UserPhotos from '../../components/UserPhotos/UserPhotos';
 import Follow from '../../components/Follow/Follow';
 
-import * as actions from '../../store/actions/index';
 import { Spin, Divider, Tabs } from 'antd';
 import './UserProfile.css';
 

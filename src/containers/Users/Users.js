@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
-import { Row, Col, Input, Icon } from 'antd';
-
 
 import Follow from '../../components/Follow/Follow';
 
-import { List, Button, Spin, Avatar, Card } from 'antd';
+import { Row, Col, Input, Icon, List, Spin, Avatar } from 'antd';
 import styled from 'styled-components';
 
 const Search = Input.Search;
@@ -34,15 +31,14 @@ const Container = styled.div `
 `;
 
 class Users extends Component {
+  state = {
+    username: ''
+  };
 
   componentDidMount() {
     this.props.onFetchUsers();
     this.props.onFetchFollowings(this.props.auth.uid);
   }
-
-  state = {
-     username: ''
-  };
 
   updateSearch = (event) => {
     this.setState({ 
