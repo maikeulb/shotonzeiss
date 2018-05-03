@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 
 import PhotoDetails from '../../components/PhotoDetails/PhotoDetails';
@@ -97,4 +96,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Photos ));
+export default connect( mapStateToProps, mapDispatchToProps )( Photos );
