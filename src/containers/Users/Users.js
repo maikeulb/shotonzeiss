@@ -45,12 +45,13 @@ class Users extends Component {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src={user.avatarUrl} />}
-              title={<Link to={`/users/${user.id}`}>{user.displayName}</Link>}
+              title={<Link to={`/users/${user.id}`}>{ user.displayName }</Link>}
             />
             {(this.props.auth.uid !== user.id) &&
               <Follow 
-                isFollowing = { this.props.followings.includes(user.id)}
-                followeeId = { user.id}
+                isFollowing = { this.props.followings.includes(user.id) }
+                followeeId = { user.id }
+                followee = { user.displayName }
                 followerId = { this.props.auth.uid }
               />
             }

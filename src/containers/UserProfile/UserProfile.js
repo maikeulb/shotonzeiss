@@ -46,14 +46,17 @@ class UserProfile extends Component {
 
   render() {
     let follow;
-    if ( this.props.auth.uid !== this.state.userId) {
-      follow =  (
-        <Follow 
-        isFollowing = { this.props.followings.includes(this.state.userId)}
-        followeeId = { this.state.userId }
-        followerId = { this.props.auth.uid }
-      />
-      );
+    if ( !this.props.loading && this.props.photos[0]) {
+      if ( this.props.auth.uid !== this.state.userId) {
+        follow =  (
+          <Follow 
+          isFollowing = { this.props.followings.includes(this.state.userId)}
+          followeeId = { this.state.userId }
+          followee = { this.props.photos[0].displayName }
+          followerId = { this.props.auth.uid }
+        />
+        );
+      }
     }
 
     let friendPane;

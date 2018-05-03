@@ -3,17 +3,27 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
-import { Icon } from 'antd';
+import { Icon, message } from 'antd';
 
 class Follow extends Component {
   handleClick = (e) => {
     e.preventDefault();
     if (this.props.isFollowing) {
       this.props.onUnfollowUser(this.props.followerId, this.props.followeeId);
+      this.unfollow(this.props.followee)
     } else {
       this.props.onFollowUser(this.props.followerId, this.props.followeeId);
+      this.follow(this.props.followee)
     }
   }
+
+  follow = (user) => {
+    message.info(`You are now following ${user}!`);
+  };
+
+  unfollow = (user) => {
+    message.info(`You have unfollowed ${user}`);
+  };
 
   render() {
     let followIcon= (this.props.isFollowing) ? "user-delete" : "user-add";
