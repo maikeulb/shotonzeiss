@@ -16,8 +16,7 @@ class UserProfile extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if(nextProps.match.params.id !== prevState.prevUserId) {
       return {
-         prevUserId: nextProps.match.params.id,
-         userId: null
+         prevUserId: nextProps.match.params.id
       };
     }
     return null;
@@ -27,30 +26,24 @@ class UserProfile extends Component {
     this.props.onFetchUserPhotos(this.props.match.params.id);
     this.props.onFetchFriendsPhotos(this.props.match.params.id);
     this.props.onFetchFollowings(this.props.auth.uid);
-      this.setState({ 
-        userId: this.props.match.params.id
-      });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.userId === null) {
+    if (this.state.prevUserId !== prevState.prevUserId) {
       this.props.onFetchUserPhotos(this.props.match.params.id);
       this.props.onFetchFriendsPhotos(this.props.match.params.id);
       this.props.onFetchFollowings(this.props.auth.uid);
-      this.setState({ 
-        userId: this.props.match.params.id
-      });
     }
   }
 
   render() {
     let follow;
     if ( !this.props.loading && this.props.photos[0]) {
-      if ( this.props.auth.uid !== this.state.userId) {
+      if ( this.props.auth.uid !== this.props.match.params.id) {
         follow =  (
           <Follow 
-          isFollowing = { this.props.followings.includes(this.state.userId)}
-          followeeId = { this.state.userId }
+          isFollowing = { this.props.followings.includes(this.props.match.params.id)}
+          followeeId = { this.props.match.params.id}
           followee = { this.props.photos[0].displayName }
           followerId = { this.props.auth.uid }
         />
